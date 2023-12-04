@@ -1,17 +1,34 @@
-<!--
-=========================================================
-* Material Dashboard 2 - v3.1.0
-=========================================================
+<?php
+if (isset($_GET['aksi'])) {
+  if ($_GET['aksi'] == 'login') {
+    session_start();
+    include 'assets/conn/config.php';
+    $username = $_POST['username'];
+    $password = $_POST['password'];
 
-* Product Page: https://www.creative-tim.com/product/material-dashboard
-* Copyright 2023 Creative Tim (https://www.creative-tim.com)
-* Licensed under MIT (https://www.creative-tim.com/license)
-* Coded by Creative Tim
+    $hasil = $db->query("SELECT * FROM tbl_akun WHERE username='$username' AND password='$password'");
+    $cek = mysqli_num_rows($hasil);
 
-=========================================================
+    if ($cek > 0) {
+      $data = $hasil->fetch_assoc();
+      $_SESSION['kd_akun_user'] = $data['kd_akun']; // Simpan kd_akun di sesi
+      $_SESSION['username'] = $username;
+      $_SESSION['level'] = $data['level'];
 
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
--->
+      if ($data['level'] == '0') {
+        header("location:admin/index.php");
+      } elseif ($data['level'] == '1') {
+        header("location:petlap/index.php");
+      } else {
+        header("location:index.php?pesan=gagal");
+      }
+    } else {
+      header("location:index.php?pesan=gagal");
+    }
+  }
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -38,6 +55,11 @@
 </head>
 
 <body class="bg-gray-200">
+  <?php
+  if (isset($_GET['aksi']) && $_GET['aksi'] == 'login') {
+    echo "<div class='alert alert-danger text-center' role='alert'>Login anda gagal username dan password salah</div>";
+  }
+  ?>
   <main class="main-content mt-0">
     <div class="page-header align-items-start min-vh-100" style="background-image: url('https://images.unsplash.com/photo-1497294815431-9365093b7331?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1950&q=80')">
       <span class="mask bg-gradient-dark opacity-6"></span>
@@ -64,17 +86,15 @@
                 </div>
               </div>
               <div class="card-body">
-                <form role="form" class="text-start">
+                <form action="index.php?aksi=login" method="post" enctype="multipart/form-data">
                   <div class="input-group input-group-outline my-3">
-                    <label class="form-label">Username</label>
-                    <input type="email" class="form-control" />
+                    <input type="text" name="username" class="form-control" placeholder="Username" />
                   </div>
                   <div class="input-group input-group-outline mb-3">
-                    <label class="form-label">Password</label>
-                    <input type="password" class="form-control" />
+                    <input type="password" name="password" class="form-control" placeholder="Password" />
                   </div>
                   <div class="text-center">
-                    <button type="button" class="btn w-100 my-4 mb-2" style="background-color:#006e8c; color:white;">Sign in</button>
+                    <button type="submit" class="btn w-100 my-4 mb-2" style="background-color:#006e8c; color:white;">Sign in</button>
                   </div>
                 </form>
               </div>
