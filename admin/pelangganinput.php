@@ -1,7 +1,6 @@
 <?php
-
+$pageTitle = "Pelanggan";
 include '../assets/layouts/sidebar.php';
-
 $hasil = "SELECT * FROM tbl_pelanggan ";
 
 $tampil = mysqli_query($db, $hasil);
@@ -165,19 +164,19 @@ $tampil = mysqli_query($db, $hasil);
                                 <table class="table align-items-center mb-0">
                                     <thead>
                                         <tr>
-                                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Idpel</th>
-                                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Nama</th>
-                                            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Daya</th>
-                                            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Tipe</th>
-                                            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Lokasi</th>
-                                            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Pmet</th>
-                                            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Merek</th>
-                                            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">tipe meter</th>
-                                            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Nomer Meter</th>
-                                            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Keterangan</th>
-                                            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Rincian</th>
-                                            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Opsi</th>
-                                            <th class="text-secondary opacity-7"></th>
+                                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder ">Idpel</th>
+                                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder  ps-2">Nama</th>
+                                            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder ">Daya</th>
+                                            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder ">Tipe</th>
+                                            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder ">Lokasi</th>
+                                            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder ">Pmet</th>
+                                            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder ">Merek</th>
+                                            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder ">tipe meter</th>
+                                            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder ">Nomer Meter</th>
+                                            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder ">Keterangan</th>
+                                            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder ">Rincian</th>
+                                            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder ">Opsi</th>
+                                            <th class="text-secondary "></th>
                                         </tr>
                                     </thead>
                                     <tbody>
