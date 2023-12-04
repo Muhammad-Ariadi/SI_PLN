@@ -23,63 +23,72 @@ $tampil = mysqli_query($db, $hasil);
                                 <table class="table align-items-center mb-0">
                                     <thead>
                                         <tr>
-                                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder ">Idpel</th>
-                                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder  ps-2">Nama</th>
-                                            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder ">Daya</th>
-                                            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder ">Tipe</th>
-                                            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder ">Lokasi</th>
-                                            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder ">Pmet</th>
-                                            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder ">Merek</th>
-                                            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder ">tipe meter</th>
-                                            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder ">Nomer Meter</th>
-                                            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder ">Keterangan</th>
-                                            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder ">Rincian</th>
-                                            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder ">Opsi</th>
-                                            <th class="text-secondary "></th>
+                                            <th class="text-center text-uppercase ">Idpel</th>
+                                            <th class="text-center text-uppercase ">Nama</th>
+                                            <th class="text-center text-uppercase ">Daya</th>
+                                            <th class="text-center text-uppercase ">Tipe</th>
+                                            <th class="text-center text-uppercase ">Lokasi</th>
+                                            <th class="text-center text-uppercase ">Pmet</th>
+                                            <th class="text-center text-uppercase ">Merek</th>
+                                            <th class="text-center text-uppercase ">tipe meter</th>
+                                            <th class="text-center text-uppercase ">Nomer Meter</th>
+                                            <th class="text-center text-uppercase ">Keterangan</th>
+                                            <th class="text-center text-uppercase ">Rincian</th>
+                                            <th class="text-center text-uppercase ">Opsi</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <?php
-                                        $counter = 1;
                                         while ($d = $tampil->fetch_array()) {
                                         ?>
                                             <tr>
-                                                <td class="text-center"><?php echo $d['idpel'] ?></td>
-                                                <td class="text-center" style="max-width: 100px;">
+                                                <td class="text-center text-s"><?php echo $d['idpel'] ?></td>
+                                                <td class="text-center text-s" style="max-width: 100px;">
                                                     <div style="word-wrap: break-word; ">
                                                         <?php echo $d['nama_pel'] ?>
                                                     </div>
                                                 </td>
-                                                <td class="text-center"><?php echo $d['daya'] ?></td>
-                                                <td class="text-center"><?php echo $d['tipe'] ?></td>
-                                                <td class="text-center">
+                                                <td class="text-center text-s"><?php echo $d['daya'] ?></td>
+                                                <td class="text-center text-s"><?php echo $d['tipe'] ?></td>
+                                                <td class="text-center text-s">
                                                     <a href='https://www.google.com/maps?q=<?php echo $d["latitude"] ?>,<?php echo $d["longitude"]; ?>' target="_blank">Lihat di Google Maps</a>
                                                 </td>
-                                                <td class="text-center">
+                                                <td class="text-center text-s">
                                                     <a href="javascript:void(0);" onclick="tampilkanGambar('../file/<?php echo $d['pmet']; ?>')">
                                                         <img src="../file/<?php echo $d['pmet']; ?>" style="width: 50px; height: 100px">
                                                     </a>
                                                 </td>
-                                                <td class="text-center"><?php echo $d['merk'] ?></td>
-                                                <td class="text-center"><?php echo $d['tipemet'] ?></td>
-                                                <td class="text-center"><?php echo $d['nomet'] ?></td>
-                                                <td class="text-center"><?php echo $d['ket'] ?></td>
-                                                <td class="text-center" style="max-width: 100px;">
+                                                <td class="text-center text-s"><?php echo $d['merk'] ?></td>
+                                                <td class="text-center text-s"><?php echo $d['tipemet'] ?></td>
+                                                <td class="text-center text-s"><?php echo $d['nomet'] ?></td>
+                                                <td class="text-center text-s"><?php echo $d['ket'] ?></td>
+                                                <td class="text-center text-s" style="max-width: 100px;">
                                                     <div style="word-wrap: break-word; ">
                                                         <?php echo $d['ket2'] ?>
                                                     </div>
                                                 </td>
-                                                <!-- <td class="text-center">
+                                                <td class="text-center">
                                                     <a href="pelangganaksi.php?kode=<?php echo $d['idpel'] ?>&aksi=ubah" class="btn btn-success">Ubah</a>
                                                     <a href="javascript:void(0);" class="btn btn-danger" onclick="hapusData('<?php echo $d['idpel']; ?>')">Hapus</a>
-                                                </td> -->
+                                                </td>
                                             </tr>
                                         <?php
-                                            $counter++;
                                         }
                                         ?>
                                     </tbody>
                                 </table>
+                                <div id="gambarPopUp" class="modal">
+
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h3>Bukti Dokumentasi</h3>
+                                            <span class="close" onclick="tutupPopUp()">&times;</span>
+                                        </div>
+                                        <div class="modal-body">
+                                            <img id="gambarModal">
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -161,6 +170,93 @@ $tampil = mysqli_query($db, $hasil);
                     damping: "0.5",
                 };
                 Scrollbar.init(document.querySelector("#sidenav-scrollbar"), options);
+            }
+
+            function hapusData(idpelanggan) {
+                if (confirm('Apakah Anda yakin ingin menghapus data ini?')) {
+                    window.location.href = 'pelangganproses.php?kode=' + idpelanggan + '&proses=proseshapus';
+                }
+            }
+
+            var currentZoom = 1;
+            var pointerOffsetX = 0;
+            var pointerOffsetY = 0;
+
+            function tampilkanGambar(namaGambar) {
+                var gambarModal = document.getElementById('gambarModal');
+                var gambarPopUp = document.getElementById('gambarPopUp');
+                var modalContent = document.querySelector('.modal-content');
+                var pagination = document.querySelector('.pagination');
+
+                gambarModal.src = namaGambar;
+                currentZoom = 1; // Reset zoom ke 1 saat gambar baru ditampilkan.
+                pointerOffsetX = 0;
+                pointerOffsetY = 0;
+
+                // Set lebar modal sesuai dengan gambar asli
+                var gambarAsli = new Image();
+                gambarAsli.src = namaGambar;
+                gambarAsli.onload = function() {
+                    var lebarAsli = this.width;
+                    modalContent.style.width = lebarAsli + 'px';
+                    gambarPopUp.style.display = "block";
+                    // Hide pagination
+                    pagination.style.display = "none";
+                };
+            }
+
+            gambarPopUp.addEventListener('click', function(event) {
+                if (event.target === gambarPopUp) {
+                    tutupPopUp();
+                }
+            });
+
+            function tutupPopUp() {
+                var gambarPopUp = document.getElementById('gambarPopUp');
+                var pagination = document.querySelector('.pagination');
+                gambarPopUp.style.display = "none";
+                // Show pagination again
+                pagination.style.display = "block";
+            }
+
+            gambarModal.addEventListener('click', function(event) {
+                if (currentZoom !== 1) {
+                    // Reset zoom jika saat ini di-zoom
+                    currentZoom = 1;
+                    gambarModal.style.transform = 'scale(1)';
+                } else {
+                    // Hitung posisi pointer relatif terhadap gambar
+                    var gambarRect = gambarModal.getBoundingClientRect();
+                    pointerOffsetX = (event.clientX - gambarRect.left) / gambarRect.width;
+                    pointerOffsetY = (event.clientY - gambarRect.top) / gambarRect.height;
+
+                    // Zoom dengan faktor 2 (Anda bisa menyesuaikan sesuai kebutuhan)
+                    currentZoom = 2;
+                    gambarModal.style.transform = 'scale(2)';
+                    // Set transform origin sesuai dengan posisi pointer
+                    gambarModal.style.transformOrigin = (pointerOffsetX * 100) + '% ' + (pointerOffsetY * 100) + '%';
+                }
+            });
+
+            function tutupPopUp() {
+                var gambarPopUp = document.getElementById('gambarPopUp');
+                var pagination = document.querySelector('.pagination');
+                gambarPopUp.style.display = "none";
+                // Show pagination again
+                pagination.style.display = "block";
+            }
+            gambarModal.addEventListener('click', function() {
+                gambarModal.classList.toggle('zoomed'); // Aktifkan atau nonaktifkan zoom.
+            });
+
+            function openImportPopup() {
+                var importPopup = document.getElementById('importPopup');
+                importPopup.style.display = "block";
+            }
+
+            function closeImportPopup() {
+                var importPopup = document.getElementById('importPopup');
+                importPopup.style.display = "none";
             }
         </script>
 
