@@ -37,135 +37,75 @@ if (isset($_SESSION['username'])) {
 }
 ?>
 
-<style>
-    .container-xl {
-        max-width: 1705px;
-    }
-
-    .list-group {
-        border: none;
-    }
-
-    .list-group-item {
-        border-top: 1px solid #ccc;
-        border-bottom: 1px solid #ccc;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-    }
-
-    .list-group-item a {
-        font-weight: bold;
-    }
-
-    .card {
-        box-shadow: 0 0 1px rgba(0, 0, 0, .125), 0 1px 3px rgba(0, 0, 0, .2);
-        margin-bottom: 1rem;
-        border-radius: 10px;
-    }
-
-    .card2 {
-        box-shadow: 0 0 1px rgba(0, 0, 0, .125), 0 1px 3px rgba(0, 0, 0, .2);
-        margin-bottom: 1rem;
-        border-radius: 10px;
-    }
-
-    .card2-title {
-        float: left;
-        font-size: 1.1rem;
-        font-weight: 400;
-        margin: 0;
-    }
-
-    .card-title {
-        float: left;
-        font-size: 1.1rem;
-        font-weight: 400;
-        margin: 0;
-    }
-
-    .inner {
-        padding: 10px;
-        border-radius: 10px;
-    }
-
-    .inner2 {
-        text-align: center;
-        align-items: center;
-        padding: 2px;
-        border-radius: 10px;
-        color: whitesmoke;
-    }
-
-    .icon-right {
-        display: flex;
-        justify-content: flex-end;
-        font-size: 50px;
-        align-items: center;
-    }
-</style>
-
-<div class="container-xl">
+<div class="container-fluid py-4">
     <div class="row">
-        <ol class="breadcrumb px-2 pt-2">
-            <h3><?php echo $welcome_message; ?></h3>
-        </ol>
-    </div>
-    <div class="panel-container">
-        <div class="bootstrap-tabel">
+        <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
             <div class="card">
-                <div class="card-header">
-                    <h3 class="card-title">Selamat Datang <?php echo $data['nama_lengkap']; ?>(
-                        <?php
-                        if ($data['level'] == 0) {
-                            echo "Admin";
-                        } else {
-                            echo "";
-                        }
-                        ?> </td>)</h3>
-                </div>
-                <div class="card-body">
-                    <h3>Data Saat Ini</h3>
-                    <div class="row">
-                        <div class="col-lg-3 col-6">
-                            <div class="card">
-                                <div class="inner bg-info">
-                                    <h4><?php echo $jumlah_target; ?></h4>
-                                    <div class="icon-right"><i class="fas fa-user-check"></i></div>
-                                    <p>Pelanggan</p>
-                                </div>
-
-                            </div>
-                        </div>
-                        <div class="col-lg-3 col-6">
-                            <div class="card">
-                                <div class="inner bg-danger">
-                                    <h4><?php echo $jumlah_target2; ?></h4>
-                                    <div class="icon-right"><i class="fas fa-user-clock"></i></div>
-                                    <p>Pending</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-3 col-6">
-                            <div class="card">
-                                <div class="inner bg-warning">
-                                    <h4><?php echo $jumlah_target3; ?></h4>
-                                    <div class="icon-right"><i class="fas fa-users"></i></div>
-                                    <p>Petugas</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-3 col-6">
-                            <div class="card2">
-                                <div class="inner2 bg-info">
-                                    <p id="real-time-date"></p>
-                                </div>
-                            </div>
-                        </div>
+                <div class="card-header p-3 pt-2">
+                    <div class="icon icon-lg icon-shape bg-gradient-dark shadow-dark text-center border-radius-xl mt-n4 position-absolute">
+                        <i class="material-icons opacity-10">weekend</i>
                     </div>
+                    <div class="text-end pt-1">
+                        <p class="text-sm mb-0 text-capitalize">Today's Money</p>
+                        <h4 class="mb-0">$53k</h4>
+                    </div>
+                </div>
+                <hr class="dark horizontal my-0">
+                <div class="card-footer p-3">
+                    <p class="mb-0"><span class="text-success text-sm font-weight-bolder">+55% </span>than last week</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
+            <div class="card">
+                <div class="card-header p-3 pt-2">
+                    <div class="icon icon-lg icon-shape bg-gradient-primary shadow-primary text-center border-radius-xl mt-n4 position-absolute">
+                        <i class="material-icons opacity-10">person</i>
+                    </div>
+                    <div class="text-end pt-1">
+                        <p class="text-sm mb-0 text-capitalize">Today's Users</p>
+                        <h4 class="mb-0">2,300</h4>
+                    </div>
+                </div>
+                <hr class="dark horizontal my-0">
+                <div class="card-footer p-3">
+                    <p class="mb-0"><span class="text-success text-sm font-weight-bolder">+3% </span>than last month</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
+            <div class="card">
+                <div class="card-header p-3 pt-2">
+                    <div class="icon icon-lg icon-shape bg-gradient-success shadow-success text-center border-radius-xl mt-n4 position-absolute">
+                        <i class="material-icons opacity-10">person</i>
+                    </div>
+                    <div class="text-end pt-1">
+                        <p class="text-sm mb-0 text-capitalize">New Clients</p>
+                        <h4 class="mb-0">3,462</h4>
+                    </div>
+                </div>
+                <hr class="dark horizontal my-0">
+                <div class="card-footer p-3">
+                    <p class="mb-0"><span class="text-danger text-sm font-weight-bolder">-2%</span> than yesterday</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-3 col-sm-6">
+            <div class="card">
+                <div class="card-header p-3 pt-2">
+                    <div class="icon icon-lg icon-shape bg-gradient-info shadow-info text-center border-radius-xl mt-n4 position-absolute">
+                        <i class="material-icons opacity-10">weekend</i>
+                    </div>
+                    <div class="text-end pt-1">
+                        <p class="text-sm mb-0 text-capitalize">Sales</p>
+                        <h4 class="mb-0">$103,430</h4>
+                    </div>
+                </div>
+                <hr class="dark horizontal my-0">
+                <div class="card-footer p-3">
+                    <p class="mb-0"><span class="text-success text-sm font-weight-bolder">+5% </span>than yesterday</p>
                 </div>
             </div>
         </div>
     </div>
 </div>
-<?php include '../assets/footer.php'; ?>
