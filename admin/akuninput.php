@@ -1,5 +1,5 @@
 <?php
-$pageTitle = "Pelanggan";
+$pageTitle = "Petugas";
 include '../assets/layouts/sidebar.php';
 ?>
 
