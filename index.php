@@ -55,7 +55,7 @@
                           <img style="width: 100px; display: inline-block; vertical-align: middle" src="assets/img/Logo_PLN.png" alt="Logo" />
                         </center>
                       </a>
-                      <div style="text-align: center">
+                      <div style="text-align: center; color: white;">
                         <p>Sistem Informasi Berbasis Website</p>
                         <p style="font-size: 12px">Login ke Akun Anda</p>
                       </div>
