@@ -20,7 +20,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
   <link rel="apple-touch-icon" sizes="76x76" href="../assets/img/apple-icon.png" />
   <link rel="icon" type="image/png" href="../assets/img/favicon.png" />
-  <title>Material Dashboard 2 by Creative Tim</title>
+  <title>Login | SIPLN</title>
   <!--     Fonts and icons     -->
   <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900|Roboto+Slab:400,700" />
   <!-- Nucleo Icons -->
@@ -46,8 +46,8 @@
           <div class="col-lg-4 col-md-8 col-12 mx-auto">
             <div class="card z-index-0 fadeIn3 fadeInBottom">
               <div class=" card-header p-0 position-relative mt-n4 mx-3 z-index-2">
-                <div class=" bg-gradient-primary shadow-primary border-radius-lg py-3 pe-1">
-                  <h4 class="text-white font-weight-bolder text-center mt-2 mb-0">Login</h4>
+                <div class=" shadow-primary border-radius-lg py-3 pe-1" style="background-color:#006e8c;">
+                  <h4 class="text-white font-weight-bolder text-center mt-2 mb-0">LOGIN</h4>
                   <div class="row mt-3">
                     <div class="text-center ms-auto">
                       <a class="btn btn-link px-3" href="javascript:;">
@@ -55,7 +55,7 @@
                           <img style="width: 100px; display: inline-block; vertical-align: middle" src="assets/img/Logo_PLN.png" alt="Logo" />
                         </center>
                       </a>
-                      <div style="text-align: center">
+                      <div style="text-align:center; color: white;">
                         <p>Sistem Informasi Berbasis Website</p>
                         <p style="font-size: 12px">Login ke Akun Anda</p>
                       </div>
@@ -74,7 +74,7 @@
                     <input type="password" class="form-control" />
                   </div>
                   <div class="text-center">
-                    <button type="button" class="btn bg-gradient-primary w-100 my-4 mb-2">Sign in</button>
+                    <button type="button" class="btn w-100 my-4 mb-2" style="background-color:#006e8c; color:white;">Sign in</button>
                   </div>
                 </form>
               </div>
