@@ -69,7 +69,7 @@ if (isset($_GET['aksi'])) {
             <div class="card z-index-0 fadeIn3 fadeInBottom">
               <div class=" card-header p-0 position-relative mt-n4 mx-3 z-index-2">
                 <div class=" shadow-primary border-radius-lg py-3 pe-1" style="background-color:#006e8c;">
-                  <h4 class="text-white font-weight-bolder text-center mt-2 mb-0">LOGIN</h4>
+                  <h4 class="text-white font-weight-bolder text-center mt-2 mb-0">Login</h4>
                   <div class="row mt-3">
                     <div class="text-center ms-auto">
                       <a class="btn btn-link px-3" href="javascript:;">
@@ -77,7 +77,7 @@ if (isset($_GET['aksi'])) {
                           <img style="width: 100px; display: inline-block; vertical-align: middle" src="assets/img/Logo_PLN.png" alt="Logo" />
                         </center>
                       </a>
-                      <div style="text-align:center; color: white;">
+                      <div style="text-align: center; color: white;">
                         <p>Sistem Informasi Berbasis Website</p>
                         <p style="font-size: 12px">Login ke Akun Anda</p>
                       </div>
