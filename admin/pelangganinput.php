@@ -22,10 +22,9 @@ $tampil = mysqli_query($db, $hasil);
                                 <a href="pelangganaksi.php?aksi=tambah" class="btn btn-primary">Tambah data</a>
                             </div>
                         </div>
-                        <div class="card-body px-0 pb-2">
+                        <div class="card-body px-2 pb-2">
                             <div class="table-responsive p-0">
-
-                                <table class="table align-items-center mb-0">
+                                <table class="table align-items-center mb-1">
                                     <thead>
                                         <tr>
                                             <th class="text-center text-uppercase ">Idpel</th>
