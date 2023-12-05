@@ -1,350 +1,209 @@
 <?php
 $pageTitle = "Target";
 include '../assets/layouts/sidebar.php';
+
+if (isset($_SESSION['username'])) {
+  $username = $_SESSION['username'];
+  $level = $_SESSION['level'];
+
+  if (isset($_GET['cari'])) {
+    $cari = $db->real_escape_string($_GET['cari']);
+    $query = $db->query("SELECT * FROM tbl_akun WHERE nama_lengkap LIKE '%$cari%' ");
+  } else {
+    $query = $db->query("SELECT * FROM tbl_akun where level='1'");
+  }
+
+  $totalData = $query->num_rows;
+  $dataPerPage = 8;
+  $totalPages = ceil($totalData / $dataPerPage);
+
+  if (isset($_GET['page'])) {
+    $currentPage = $_GET['page'];
+  } else {
+    $currentPage = 1;
+  }
+
+  $startIndex = ($currentPage - 1) * $dataPerPage;
+  $endIndex = $startIndex + $dataPerPage;
+} else {
+  header("location: ../index.php");
+  exit();
+}
 ?>
 
-<div class="row mb-4">
-  <div class="col-lg-8 col-md-6 mb-md-0 mb-4">
-    <div class="card">
-      <div class="card-header pb-0">
-        <div class="row">
-          <div class="col-lg-6 col-7">
-            <h6>Projects</h6>
-            <p class="text-sm mb-0">
-              <i class="fa fa-check text-info" aria-hidden="true"></i>
-              <span class="font-weight-bold ms-1">30 done</span> this month
-            </p>
-          </div>
-          <div class="col-lg-6 col-5 my-auto text-end">
-            <div class="dropdown float-lg-end pe-4">
-              <a class="cursor-pointer" id="dropdownTable" data-bs-toggle="dropdown" aria-expanded="false">
-                <i class="fa fa-ellipsis-v text-secondary"></i>
-              </a>
-              <ul class="dropdown-menu px-2 py-3 ms-sm-n4 ms-n5" aria-labelledby="dropdownTable">
-                <li><a class="dropdown-item border-radius-md" href="javascript:;">Action</a></li>
-                <li><a class="dropdown-item border-radius-md" href="javascript:;">Another action</a></li>
-                <li><a class="dropdown-item border-radius-md" href="javascript:;">Something else here</a></li>
-              </ul>
-            </div>
-          </div>
-        </div>
+<body class="g-sidenav-show bg-gray-200">
+  <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg">
+    <div class="container-fluid py-4">
+      <div class="row">
+        <ol class="breadcrumb px-2 pt-2">
+          <h4>INPUT DATA HAK AKSES</h4>
+        </ol>
       </div>
-      <div class="card-body px-0 pb-2">
-        <div class="table-responsive">
-          <table class="table align-items-center mb-0">
-            <thead>
-              <tr>
-                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Companies</th>
-                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Members</th>
-                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Budget</th>
-                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Completion</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>
-                  <div class="d-flex px-2 py-1">
-                    <div>
-                      <img src="../assets/img/small-logos/logo-xd.svg" class="avatar avatar-sm me-3" alt="xd">
-                    </div>
-                    <div class="d-flex flex-column justify-content-center">
-                      <h6 class="mb-0 text-sm">Material XD Version</h6>
+      <div class="panel-container">
+        <div class="bootstrap-tabel">
+          <div class="d-flex justify-content-between mb-3">
+            <div class="row">
+              <div class="col">
+                <button class="btn btn-success ml-2" onclick="openImportPopup()">Import Data</button>
+              </div>
+            </div>
+            <div id="importPopup" class="modal">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h3>Import Data</h3>
+                  <span class="close" onclick="closeImportPopup()">&times;</span>
+                </div>
+                <div class="modal-body">
+                  <div class="row">
+                    <!-- <div class="col text-center">
+                                    <a href="excel.php" target="_blank">
+                                        <button class="btn btn-success">Export</button>
+                                    </a>
+                                </div> -->
+                    <div class="col text-center">
+                      <a href="../assets/tmp/Daftar_Target.xlsx" target="_blank">
+                        <button class="btn btn-primary" download>Template Excel</button>
+                      </a>
                     </div>
                   </div>
-                </td>
-                <td>
-                  <div class="avatar-group mt-2">
-                    <a href="javascript:;" class="avatar avatar-xs rounded-circle" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Ryan Tompson">
-                      <img src="../assets/img/team-1.jpg" alt="team1">
-                    </a>
-                    <a href="javascript:;" class="avatar avatar-xs rounded-circle" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Romina Hadid">
-                      <img src="../assets/img/team-2.jpg" alt="team2">
-                    </a>
-                    <a href="javascript:;" class="avatar avatar-xs rounded-circle" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Alexander Smith">
-                      <img src="../assets/img/team-3.jpg" alt="team3">
-                    </a>
-                    <a href="javascript:;" class="avatar avatar-xs rounded-circle" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Jessica Doe">
-                      <img src="../assets/img/team-4.jpg" alt="team4">
-                    </a>
-                  </div>
-                </td>
-                <td class="align-middle text-center text-sm">
-                  <span class="text-xs font-weight-bold"> $14,000 </span>
-                </td>
-                <td class="align-middle">
-                  <div class="progress-wrapper w-75 mx-auto">
-                    <div class="progress-info">
-                      <div class="progress-percentage">
-                        <span class="text-xs font-weight-bold">60%</span>
+                </div>
+                <div class="modal-body">
+                  <form action="import.php" method="post" enctype="multipart/form-data">
+                    <div class="form-group">
+                      <label for="excelFile">Import File Excel</label>
+                      <div class="row">
+                        <div class="col text-center">
+                          <div class="input-group ">
+                            <input type="file" class="form-control" name="excelFile">
+                          </div>
+                        </div>
+                        <div class="col text-center">
+                          <button class="btn btn-danger">Import</button>
+                        </div>
                       </div>
                     </div>
-                    <div class="progress">
-                      <div class="progress-bar bg-gradient-info w-60" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
+                  </form>
+                </div>
+              </div>
+            </div>
+            <form class="d-flex ml-auto">
+              <input class="form-control mr-1" name="cari" type="search" placeholder="Search" aria-label="Search" value="<?php if (isset($_GET['cari'])) {
+                                                                                                                            echo $_GET['cari'];
+                                                                                                                          } ?>">
+              <button class="btn" type="submit">
+                <svg width="20px" height="20px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M15.7955 15.8111L21 21M18 10.5C18 14.6421 14.6421 18 10.5 18C6.35786 18 3 14.6421 3 10.5C3 6.35786 6.35786 3 10.5 3C14.6421 3 18 6.35786 18 10.5Z" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+              </button>
+            </form>
+          </div>
+          <hr>
+          <div class="row">
+            <?php foreach ($query as $row) : ?>
+              <?php
+              $kd_akun = $row['kd_akun'];
+              $target_query = $db->query("SELECT COUNT(*) as jumlah_target FROM tbl_target WHERE kd_akun = '$kd_akun'");
+              $target_data = $target_query->fetch_assoc();
+              $jumlah_target = $target_data['jumlah_target'];
+
+              $countQuery = $db->query("SELECT COUNT(*) as jumlah_data FROM tbl_pelanggan WHERE kd_akun = '$kd_akun'");
+              $countData = $countQuery->fetch_assoc();
+              $jumlah_data = $countData['jumlah_data'];
+
+              $selisih = $jumlah_data - $jumlah_target;
+
+              $kd_akun = $row['kd_akun'];
+              $queryAkun = $db->query("SELECT foto FROM tbl_akun WHERE kd_akun = '$kd_akun'");
+              $akunData = $queryAkun->fetch_assoc();
+              $fotoProfil = $akunData['foto'];
+              $fotoProfilPath = '../assets/img/file' . $fotoProfil;
+              ?>
+              <div class="col-md-3">
+                <div class="card card-primary card-outline" style="border-top: 5px solid #007bff; margin-bottom: 20px;">
+                  <div class="card-body box-profile">
+                    <div class="text-center">
+                      <img class="foto-user" src="<?php echo $fotoProfilPath; ?>" alt="User profile picture">
                     </div>
+
+                    <h3 class="profile-username text-center"><?php echo $row['nama_lengkap']; ?></h3>
+                    <p class="text-muted text-center">
+                      <?php
+                      if ($row['level'] == 0) {
+                        echo "Admin";
+                      } elseif ($row['level'] == 1) {
+                        echo "Petugas Lapangan ($kd_akun)";
+                      } else {
+                        echo $row['level'];
+                      }
+                      ?>
+                    </p>
+                    <ul class="list-group list-group-unbordered mb-3">
+                      <li class="list-group-item">
+                        <b>Jumlah Target</b> <a class="float-right"><?php echo $jumlah_target; ?></a>
+                      </li>
+                      <li class="list-group-item">
+                        <b>Pending</b> <a class="float-right"><?php echo $selisih; ?></a>
+                      </li>
+                    </ul>
+                    <a href="targetaksi.php?aksi=tambah&kd_akun=<?php echo $row['kd_akun']; ?>" class="btn btn-success btn-block"><b>Tambah Target</b></a>
+                    <a href="targetdetail.php?kd_akun=<?php echo $row['kd_akun']; ?>" class="btn btn-primary btn-block"><b>Detail Target</b></a>
                   </div>
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <div class="d-flex px-2 py-1">
-                    <div>
-                      <img src="../assets/img/small-logos/logo-atlassian.svg" class="avatar avatar-sm me-3" alt="atlassian">
-                    </div>
-                    <div class="d-flex flex-column justify-content-center">
-                      <h6 class="mb-0 text-sm">Add Progress Track</h6>
-                    </div>
-                  </div>
-                </td>
-                <td>
-                  <div class="avatar-group mt-2">
-                    <a href="javascript:;" class="avatar avatar-xs rounded-circle" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Romina Hadid">
-                      <img src="../assets/img/team-2.jpg" alt="team5">
-                    </a>
-                    <a href="javascript:;" class="avatar avatar-xs rounded-circle" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Jessica Doe">
-                      <img src="../assets/img/team-4.jpg" alt="team6">
-                    </a>
-                  </div>
-                </td>
-                <td class="align-middle text-center text-sm">
-                  <span class="text-xs font-weight-bold"> $3,000 </span>
-                </td>
-                <td class="align-middle">
-                  <div class="progress-wrapper w-75 mx-auto">
-                    <div class="progress-info">
-                      <div class="progress-percentage">
-                        <span class="text-xs font-weight-bold">10%</span>
-                      </div>
-                    </div>
-                    <div class="progress">
-                      <div class="progress-bar bg-gradient-info w-10" role="progressbar" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
-                    </div>
-                  </div>
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <div class="d-flex px-2 py-1">
-                    <div>
-                      <img src="../assets/img/small-logos/logo-slack.svg" class="avatar avatar-sm me-3" alt="team7">
-                    </div>
-                    <div class="d-flex flex-column justify-content-center">
-                      <h6 class="mb-0 text-sm">Fix Platform Errors</h6>
-                    </div>
-                  </div>
-                </td>
-                <td>
-                  <div class="avatar-group mt-2">
-                    <a href="javascript:;" class="avatar avatar-xs rounded-circle" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Romina Hadid">
-                      <img src="../assets/img/team-3.jpg" alt="team8">
-                    </a>
-                    <a href="javascript:;" class="avatar avatar-xs rounded-circle" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Jessica Doe">
-                      <img src="../assets/img/team-1.jpg" alt="team9">
-                    </a>
-                  </div>
-                </td>
-                <td class="align-middle text-center text-sm">
-                  <span class="text-xs font-weight-bold"> Not set </span>
-                </td>
-                <td class="align-middle">
-                  <div class="progress-wrapper w-75 mx-auto">
-                    <div class="progress-info">
-                      <div class="progress-percentage">
-                        <span class="text-xs font-weight-bold">100%</span>
-                      </div>
-                    </div>
-                    <div class="progress">
-                      <div class="progress-bar bg-gradient-success w-100" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
-                    </div>
-                  </div>
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <div class="d-flex px-2 py-1">
-                    <div>
-                      <img src="../assets/img/small-logos/logo-spotify.svg" class="avatar avatar-sm me-3" alt="spotify">
-                    </div>
-                    <div class="d-flex flex-column justify-content-center">
-                      <h6 class="mb-0 text-sm">Launch our Mobile App</h6>
-                    </div>
-                  </div>
-                </td>
-                <td>
-                  <div class="avatar-group mt-2">
-                    <a href="javascript:;" class="avatar avatar-xs rounded-circle" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Ryan Tompson">
-                      <img src="../assets/img/team-4.jpg" alt="user1">
-                    </a>
-                    <a href="javascript:;" class="avatar avatar-xs rounded-circle" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Romina Hadid">
-                      <img src="../assets/img/team-3.jpg" alt="user2">
-                    </a>
-                    <a href="javascript:;" class="avatar avatar-xs rounded-circle" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Alexander Smith">
-                      <img src="../assets/img/team-4.jpg" alt="user3">
-                    </a>
-                    <a href="javascript:;" class="avatar avatar-xs rounded-circle" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Jessica Doe">
-                      <img src="../assets/img/team-1.jpg" alt="user4">
-                    </a>
-                  </div>
-                </td>
-                <td class="align-middle text-center text-sm">
-                  <span class="text-xs font-weight-bold"> $20,500 </span>
-                </td>
-                <td class="align-middle">
-                  <div class="progress-wrapper w-75 mx-auto">
-                    <div class="progress-info">
-                      <div class="progress-percentage">
-                        <span class="text-xs font-weight-bold">100%</span>
-                      </div>
-                    </div>
-                    <div class="progress">
-                      <div class="progress-bar bg-gradient-success w-100" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
-                    </div>
-                  </div>
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <div class="d-flex px-2 py-1">
-                    <div>
-                      <img src="../assets/img/small-logos/logo-jira.svg" class="avatar avatar-sm me-3" alt="jira">
-                    </div>
-                    <div class="d-flex flex-column justify-content-center">
-                      <h6 class="mb-0 text-sm">Add the New Pricing Page</h6>
-                    </div>
-                  </div>
-                </td>
-                <td>
-                  <div class="avatar-group mt-2">
-                    <a href="javascript:;" class="avatar avatar-xs rounded-circle" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Ryan Tompson">
-                      <img src="../assets/img/team-4.jpg" alt="user5">
-                    </a>
-                  </div>
-                </td>
-                <td class="align-middle text-center text-sm">
-                  <span class="text-xs font-weight-bold"> $500 </span>
-                </td>
-                <td class="align-middle">
-                  <div class="progress-wrapper w-75 mx-auto">
-                    <div class="progress-info">
-                      <div class="progress-percentage">
-                        <span class="text-xs font-weight-bold">25%</span>
-                      </div>
-                    </div>
-                    <div class="progress">
-                      <div class="progress-bar bg-gradient-info w-25" role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="25"></div>
-                    </div>
-                  </div>
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <div class="d-flex px-2 py-1">
-                    <div>
-                      <img src="../assets/img/small-logos/logo-invision.svg" class="avatar avatar-sm me-3" alt="invision">
-                    </div>
-                    <div class="d-flex flex-column justify-content-center">
-                      <h6 class="mb-0 text-sm">Redesign New Online Shop</h6>
-                    </div>
-                  </div>
-                </td>
-                <td>
-                  <div class="avatar-group mt-2">
-                    <a href="javascript:;" class="avatar avatar-xs rounded-circle" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Ryan Tompson">
-                      <img src="../assets/img/team-1.jpg" alt="user6">
-                    </a>
-                    <a href="javascript:;" class="avatar avatar-xs rounded-circle" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Jessica Doe">
-                      <img src="../assets/img/team-4.jpg" alt="user7">
-                    </a>
-                  </div>
-                </td>
-                <td class="align-middle text-center text-sm">
-                  <span class="text-xs font-weight-bold"> $2,000 </span>
-                </td>
-                <td class="align-middle">
-                  <div class="progress-wrapper w-75 mx-auto">
-                    <div class="progress-info">
-                      <div class="progress-percentage">
-                        <span class="text-xs font-weight-bold">40%</span>
-                      </div>
-                    </div>
-                    <div class="progress">
-                      <div class="progress-bar bg-gradient-info w-40" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="40"></div>
-                    </div>
-                  </div>
-                </td>
-              </tr>
-            </tbody>
-          </table>
+                </div>
+              </div>
+            <?php endforeach; ?>
+          </div>
+          <?php
+          if ($totalPages > 1) {
+            echo '<nav aria-label="Page navigation example">';
+            echo '<ul class="pagination">';
+            if (
+              $currentPage > 1
+            ) {
+              echo '<li class="page-item"><a class="page-link" href="?page=' . ($currentPage - 1) . '">&laquo;</a></li>';
+            }
+
+            // Loop untuk mencetak nomor halaman
+            $numPagesToShow = 3; // Jumlah nomor halaman yang ingin ditampilkan
+            $halfNumPages = floor($numPagesToShow / 2);
+            $startPage = max(1, $currentPage - $halfNumPages);
+            $endPage = min($totalPages, $startPage + $numPagesToShow - 1);
+
+            if (
+              $startPage > 1
+            ) {
+              echo '<li class="page-item"><a class="page-link" href="?page=1">1</a></li>';
+              if ($startPage > 2) {
+                echo '<li class="page-item disabled"><span class="page-link">...</span></li>';
+              }
+            }
+
+            for ($i = $startPage; $i <= $endPage; $i++) {
+              echo '<li class="page-item ' . (($i == $currentPage) ? 'active' : '') . '"><a class="page-link" href="?page=' . $i . '">' . $i . '</a></li>';
+            }
+
+            if (
+              $endPage < $totalPages
+            ) {
+              if (
+                $endPage < $totalPages - 1
+              ) {
+                echo '<li class="page-item disabled"><span class="page-link">...</span></li>';
+              }
+              echo '<li class="page-item"><a class="page-link" href="?page=' . $totalPages . '">' . $totalPages . '</a></li>';
+            }
+
+            if (
+              $currentPage < $totalPages
+            ) {
+              echo '<li class="page-item"><a class="page-link" href="?page=' . ($currentPage + 1) . '">&raquo;</a></li>';
+            }
+
+            echo '</ul>';
+            echo '</nav>';
+          }
+          ?>
         </div>
       </div>
     </div>
-  </div>
-  <div class="col-lg-4 col-md-6">
-    <div class="card h-100">
-      <div class="card-header pb-0">
-        <h6>Orders overview</h6>
-        <p class="text-sm">
-          <i class="fa fa-arrow-up text-success" aria-hidden="true"></i>
-          <span class="font-weight-bold">24%</span> this month
-        </p>
-      </div>
-      <div class="card-body p-3">
-        <div class="timeline timeline-one-side">
-          <div class="timeline-block mb-3">
-            <span class="timeline-step">
-              <i class="material-icons text-success text-gradient">notifications</i>
-            </span>
-            <div class="timeline-content">
-              <h6 class="text-dark text-sm font-weight-bold mb-0">$2400, Design changes</h6>
-              <p class="text-secondary font-weight-bold text-xs mt-1 mb-0">22 DEC 7:20 PM</p>
-            </div>
-          </div>
-          <div class="timeline-block mb-3">
-            <span class="timeline-step">
-              <i class="material-icons text-danger text-gradient">code</i>
-            </span>
-            <div class="timeline-content">
-              <h6 class="text-dark text-sm font-weight-bold mb-0">New order #1832412</h6>
-              <p class="text-secondary font-weight-bold text-xs mt-1 mb-0">21 DEC 11 PM</p>
-            </div>
-          </div>
-          <div class="timeline-block mb-3">
-            <span class="timeline-step">
-              <i class="material-icons text-info text-gradient">shopping_cart</i>
-            </span>
-            <div class="timeline-content">
-              <h6 class="text-dark text-sm font-weight-bold mb-0">Server payments for April</h6>
-              <p class="text-secondary font-weight-bold text-xs mt-1 mb-0">21 DEC 9:34 PM</p>
-            </div>
-          </div>
-          <div class="timeline-block mb-3">
-            <span class="timeline-step">
-              <i class="material-icons text-warning text-gradient">credit_card</i>
-            </span>
-            <div class="timeline-content">
-              <h6 class="text-dark text-sm font-weight-bold mb-0">New card added for order #4395133</h6>
-              <p class="text-secondary font-weight-bold text-xs mt-1 mb-0">20 DEC 2:20 AM</p>
-            </div>
-          </div>
-          <div class="timeline-block mb-3">
-            <span class="timeline-step">
-              <i class="material-icons text-primary text-gradient">key</i>
-            </span>
-            <div class="timeline-content">
-              <h6 class="text-dark text-sm font-weight-bold mb-0">Unlock packages for development</h6>
-              <p class="text-secondary font-weight-bold text-xs mt-1 mb-0">18 DEC 4:54 AM</p>
-            </div>
-          </div>
-          <div class="timeline-block">
-            <span class="timeline-step">
-              <i class="material-icons text-dark text-gradient">payments</i>
-            </span>
-            <div class="timeline-content">
-              <h6 class="text-dark text-sm font-weight-bold mb-0">New order #9583120</h6>
-              <p class="text-secondary font-weight-bold text-xs mt-1 mb-0">17 DEC</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
+  </main>
+</body>
