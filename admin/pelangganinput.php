@@ -91,22 +91,7 @@ $tampil = mysqli_query($db, $hasil);
                                         }
                                         ?>
                                     </tbody>
-                                    <tfoot>
-                                        <tr>
-                                            <th>Idpel</th>
-                                            <th>Nama</th>
-                                            <th>Daya</th>
-                                            <th>Tipe</th>
-                                            <th>Lokasi</th>
-                                            <th>Pmet</th>
-                                            <th>Merek</th>
-                                            <th>tipe meter</th>
-                                            <th>Nomer Meter</th>
-                                            <th>Keterangan</th>
-                                            <th>Rincian</th>
-                                            <th>Opsi</th>
-                                        </tr>
-                                    </tfoot>
+
                                 </table>
                             </div>
                         </div>
