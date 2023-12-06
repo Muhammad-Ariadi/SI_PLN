@@ -107,6 +107,10 @@ $tampil = mysqli_query($db, $hasil);
                                         }
                                         ?>
                                     </tbody>
+<<<<<<< HEAD
+=======
+
+>>>>>>> a19d1b63d4b7cd681a53c255b001cbbb140719fa
                                 </table>
                             </div>
                         </div>
