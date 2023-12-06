@@ -7,14 +7,6 @@ $tampil = mysqli_query($db, $hasil);
 
 ?>
 
-<!-- datatable -->
-<!-- <link href="twitter-bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet" />
-<link href="1.13.7/css/dataTables.bootstrap5.min.css" rel="stylesheet" />
-<script  src="https://code.jquery.com/jquery-3.7.0.js"> </script>
-<script  src="1.13.7/js/jquery.dataTables.min.js"> </script>
-<script  src="1.13.7/js/dataTables.bootstrap5.min.js"> </script>
-<script  src="../assets/js/datatables.js"> </script> -->
-
 <link href="../assets/DataTables/DataTables-1.13.8/css/dataTables.bootstrap5.min.css" rel="stylesheet" />
 <link href="../assets/DataTables/Buttons-2.4.2/css/buttons.bootstrap5.min.css " rel="stylesheet" />
 
@@ -56,57 +48,65 @@ $tampil = mysqli_query($db, $hasil);
                                         while ($d = $tampil->fetch_array()) {
                                         ?>
                                             <tr>
-                                                <td class="text-center"><?php echo $d['idpel'] ?></td>
-                                                <td class="text-center" style="max-width: 100px;">
-                                                    <div style="word-wrap: break-word; ">
+                                                <td style="max-width: 120px; white-space: normal;">
+                                                    <?php echo $d['idpel'] ?>
+                                                </td>
+
+                                                <td style="max-width: 150px; white-space: normal;">
+                                                    <div style="word-wrap: break-word;">
                                                         <?php echo $d['nama_pel'] ?>
                                                     </div>
                                                 </td>
-                                                <td class="text-center"><?php echo $d['daya'] ?></td>
-                                                <td class="text-center"><?php echo $d['tipe'] ?></td>
+
+                                                <td style="max-width: 100px; white-space: normal;">
+                                                    <?php echo $d['daya'] ?>
+                                                </td>
+
+                                                <td style="max-width: 100px; white-space: normal;">
+                                                    <?php echo $d['tipe'] ?>
+                                                </td>
+
                                                 <td class="text-center">
                                                     <a href='https://www.google.com/maps?q=<?php echo $d["latitude"] ?>,<?php echo $d["longitude"]; ?>' target="_blank">Lihat di Google Maps</a>
                                                 </td>
+
                                                 <td class="text-center">
                                                     <a href="javascript:void(0);" onclick="tampilkanGambar('../file/<?php echo $d['pmet']; ?>')">
                                                         <img src="../file/<?php echo $d['pmet']; ?>" style="width: 50px; height: 100px">
                                                     </a>
                                                 </td>
-                                                <td class="text-center"><?php echo $d['merk'] ?></td>
-                                                <td class="text-center"><?php echo $d['tipemet'] ?></td>
-                                                <td class="text-center"><?php echo $d['nomet'] ?></td>
-                                                <td class="text-center"><?php echo $d['ket'] ?></td>
-                                                <td class="text-center" style="max-width: 100px;">
-                                                    <div style="word-wrap: break-word; ">
-                                                        <?php echo $d['ket2'] ?>
-                                                    </div>
+
+                                                <td style="max-width: 200px; white-space: normal;">
+                                                    <?php echo $d['merk'] ?>
                                                 </td>
+
+                                                <td style="max-width: 100px; white-space: normal;">
+                                                    <?php echo $d['tipemet'] ?>
+                                                </td>
+
+                                                <td style="max-width: 100px; white-space: normal;">
+                                                    <?php echo $d['nomet'] ?>
+                                                </td>
+
+                                                <td style="max-width: 100px; white-space: normal;">
+                                                    <?php echo $d['ket'] ?>
+                                                </td>
+
+                                                <td style="max-width: 400px; white-space: normal;">
+                                                    <?php echo $d['ket2'] ?>
+                                                </td>
+
                                                 <td class="text-center">
                                                     <a href="pelangganaksi.php?kode=<?php echo $d['idpel'] ?>&aksi=ubah" class="btn btn-success">Ubah</a>
                                                     <a href="javascript:void(0);" class="btn btn-danger" onclick="hapusData('<?php echo $d['idpel']; ?>')">Hapus</a>
                                                 </td>
                                             </tr>
+
                                         <?php
                                             $counter++;
                                         }
                                         ?>
                                     </tbody>
-                                    <tfoot>
-                                        <tr>
-                                            <th>Idpel</th>
-                                            <th>Nama</th>
-                                            <th>Daya</th>
-                                            <th>Tipe</th>
-                                            <th>Lokasi</th>
-                                            <th>Pmet</th>
-                                            <th>Merek</th>
-                                            <th>tipe meter</th>
-                                            <th>Nomer Meter</th>
-                                            <th>Keterangan</th>
-                                            <th>Rincian</th>
-                                            <th>Opsi</th>
-                                        </tr>
-                                    </tfoot>
                                 </table>
                             </div>
                         </div>
@@ -131,17 +131,6 @@ $tampil = mysqli_query($db, $hasil);
     <script src="../assets/DataTables/Buttons-2.4.2/js/buttons.html5.min.js"> </script>
     <script src="../assets/DataTables/Buttons-2.4.2/js/buttons.print.min.js"> </script>
     <script src="../assets/DataTables/Buttons-2.4.2/js/buttons.colVis.min.js"> </script>
-
-
-    <!-- 
-    https://cdn.datatables.net/buttons/2.4.2/js/dataTables.buttons.min.js
-    https://cdn.datatables.net/buttons/2.4.2/js/buttons.bootstrap5.min.js
-    https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js
-    https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js
-    https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js
-    https://cdn.datatables.net/buttons/2.4.2/js/buttons.html5.min.js
-    https://cdn.datatables.net/buttons/2.4.2/js/buttons.print.min.js
-    https://cdn.datatables.net/buttons/2.4.2/js/buttons.colVis.min.js -->
 
 
     <script>
