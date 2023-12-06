@@ -71,8 +71,8 @@ $tampil = mysqli_query($db, $hasil);
                                                 </td>
 
                                                 <td class="text-center">
-                                                    <a href="javascript:void(0);" onclick="tampilkanGambar('../file/<?php echo $d['pmet']; ?>')">
-                                                        <img src="../file/<?php echo $d['pmet']; ?>" style="width: 50px; height: 100px">
+                                                    <a href="javascript:void(0);" onclick="tampilkanGambar('../assets/file/datpel/<?php echo $d['pmet']; ?>')">
+                                                        <img src="../assets/file/datpel/<?php echo $d['pmet']; ?>" style="width: 50px; height: 100px">
                                                     </a>
                                                 </td>
 

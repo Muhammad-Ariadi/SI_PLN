@@ -21,7 +21,7 @@ if (isset($_GET['proses'])) {
 
         $nama_file_baru = $idpel . ".jpg";
 
-        move_uploaded_file($_FILES['pmet']['tmp_name'], '../file/' . $nama_file_baru);
+        move_uploaded_file($_FILES['pmet']['tmp_name'], '../assets/img/datpel/' . $nama_file_baru);
         $merk = $_POST["merk"];
         $tipemet = $_POST["tipemet"];
         $nomet = $_POST["nomet"];
