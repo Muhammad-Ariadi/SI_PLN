@@ -17,9 +17,12 @@ $tampil = mysqli_query($db, $hasil);
               <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
                 <h6 class="text-white text-capitalize ps-3">Data Petugas</h6>
               </div>
+              <br>
+              <a href="akunaksi.php?aksi=tambah" class="btn btn-primary">Tambah Akun</a>
             </div>
             <div class="card-body px-0 pb-2">
               <div class="table-responsive">
+
                 <table class="table align-items-center table-bordered">
                   <thead>
                     <tr>

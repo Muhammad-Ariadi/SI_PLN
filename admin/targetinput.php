@@ -114,13 +114,13 @@ if (isset($_SESSION['username'])) {
                     $queryAkun = $db->query("SELECT foto FROM tbl_akun WHERE kd_akun = '$kd_akun'");
                     $akunData = $queryAkun->fetch_assoc();
                     $fotoProfil = $akunData['foto'];
-                    $fotoProfilPath = '../assets/img/' . $fotoProfil;
+                    $fotoProfilPath = '../assets/img/akun/' . $fotoProfil;
                     ?>
                     <div class="col-md-3">
                       <div class="card card-primary card-outline" style="border-top: 5px solid #007bff; margin-bottom: 20px;">
                         <div class="card-body box-profile">
                           <div class="text-center">
-                            <img class="foto-user" src="<?php echo $fotoProfilPath; ?>" alt="User profile picture">
+                            <img class="foto-user" style="border-radius:20px;" src="<?php echo $fotoProfilPath; ?>" alt="User profile picture">
                           </div>
 
                           <h3 class="profile-username text-center"><?php echo $row['nama_lengkap']; ?></h3>
@@ -135,16 +135,28 @@ if (isset($_SESSION['username'])) {
                             }
                             ?>
                           </p>
-                          <ul class="list-group list-group-unbordered mb-3">
-                            <li class="list-group-item">
-                              <b>Jumlah Target</b> <a class="float-right"><?php echo $jumlah_target; ?></a>
-                            </li>
-                            <li class="list-group-item">
-                              <b>Pending</b> <a class="float-right"><?php echo $selisih; ?></a>
-                            </li>
-                          </ul>
-                          <a href="targetaksi.php?aksi=tambah&kd_akun=<?php echo $row['kd_akun']; ?>" class="btn btn-success btn-block"><b>Tambah Target</b></a>
-                          <a href="targetdetail.php?kd_akun=<?php echo $row['kd_akun']; ?>" class="btn btn-primary btn-block"><b>Detail Target</b></a>
+                          <table class="table table-striped">
+                            <tr>
+                              <td>
+                                <b>Jumlah</b>
+                              </td>
+                              <td>
+                                <b><?php echo $jumlah_target; ?></b>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <b>Pending</b>
+                              </td>
+                              <td>
+                                <b><?php echo $selisih; ?></b>
+                              </td>
+                            </tr>
+                          </table>
+                          <center>
+                            <a href="targetaksi.php?aksi=tambah&kd_akun=<?php echo $row['kd_akun']; ?>" class="btn btn-success btn-block"><b>Tambah Target</b></a>
+                            <a href="targetdetail.php?kd_akun=<?php echo $row['kd_akun']; ?>" class="btn btn-primary btn-block"><b>Detail Target</b></a>
+                          </center>
                         </div>
                       </div>
                     </div>
