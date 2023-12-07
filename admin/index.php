@@ -30,6 +30,31 @@ if (isset($_SESSION['username'])) {
         $dataTarget3 = $queryTarget3->fetch_assoc();
         $jumlah_target3 = $dataTarget3['jumlah_akun'];
 
+        $previousMonth = date('Y-m', strtotime('-1 month'));
+        $queryPreviousMonth = $db->query("SELECT COUNT(*) as jumlah_perbandingan FROM tbl_target WHERE status='0' AND MONTH(tanggal) = MONTH('$previousMonth') AND YEAR(tanggal) = YEAR('$previousMonth')");
+        $dataPreviousMonth = $queryPreviousMonth->fetch_assoc();
+        $jumlah_perbandingan = $dataPreviousMonth['jumlah_perbandingan'];
+        if ($jumlah_perbandingan > 0) {
+            $percentageDifference = (($jumlah_target - $jumlah_perbandingan) / $jumlah_perbandingan) * 100;
+        } else {
+            $percentageDifference = 0;
+        }
+
+        $previousWeekStart = date('Y-m-d', strtotime('-1 week', strtotime('last Sunday')));
+        $previousWeekEnd = date('Y-m-d', strtotime('-1 day', strtotime('this Sunday')));
+
+        $queryPreviousWeek = $db->query("SELECT COUNT(*) as jumlah_perbandingan2 FROM tbl_target WHERE status='1' AND tanggal BETWEEN '$previousWeekStart' AND '$previousWeekEnd'");
+        $dataPreviousWeek = $queryPreviousWeek->fetch_assoc();
+        $jumlah_perbandingan2 = $dataPreviousWeek['jumlah_perbandingan2'];
+
+        if ($jumlah_perbandingan2 > 0) {
+            $percentageDifference2 = (($jumlah_target - $jumlah_perbandingan2) / $jumlah_perbandingan2) * 100;
+        } else {
+            $percentageDifference2 = 0;
+        }
+
+
+
         $nama = "$nama_lengkap";
         $role = "$level";
     }
@@ -47,16 +72,21 @@ if (isset($_SESSION['username'])) {
                     <div class="card">
                         <div class="card-header p-3 pt-2">
                             <div class="icon icon-lg icon-shape bg-gradient-primary shadow-primary text-center border-radius-xl mt-n4 position-absolute">
-                                <i class="material-icons opacity-10">person</i>
+                                <i class="material-icons opacity-10">pending</i>
                             </div>
                             <div class="text-end pt-1">
-                                <p class="text-sm mb-0 text-capitalize">Pelanggan</p>
-                                <h4 class="mb-0"><?php echo $jumlah_target; ?></h4>
+                                <p class="text-sm mb-0 text-capitalize">Pending</p>
+                                <h4 class="mb-0"><?php echo $jumlah_target2; ?></h4>
                             </div>
                         </div>
                         <hr class="dark horizontal my-0">
                         <div class="card-footer p-3">
-                            <p class="mb-0"><span class="text-success text-sm font-weight-bolder">+3% </span>than last month</p>
+                            <p class="mb-0">
+                                <span class="<?php echo ($percentageDifference >= 0) ? 'text-success' : 'text-danger'; ?> text-sm font-weight-bolder">
+                                    <?php echo ($percentageDifference >= 0) ? '+' : ''; ?><?php echo number_format($percentageDifference, 2); ?>%
+                                </span>
+                                than the previous month
+                            </p>
                         </div>
                     </div>
                 </div>
@@ -67,13 +97,18 @@ if (isset($_SESSION['username'])) {
                                 <i class="material-icons opacity-10">person</i>
                             </div>
                             <div class="text-end pt-1">
-                                <p class="text-sm mb-0 text-capitalize">New Clients</p>
-                                <h4 class="mb-0"><?php echo $jumlah_target2; ?></h4>
+                                <p class="text-sm mb-0 text-capitalize">Success</p>
+                                <h4 class="mb-0"><?php echo $jumlah_target; ?></h4>
                             </div>
                         </div>
                         <hr class="dark horizontal my-0">
                         <div class="card-footer p-3">
-                            <p class="mb-0"><span class="text-danger text-sm font-weight-bolder">-2%</span> than yesterday</p>
+                            <p class="mb-0">
+                                <span class="<?php echo ($percentageDifference2 >= 0) ? 'text-success' : 'text-danger'; ?> text-sm font-weight-bolder">
+                                    <?php echo ($percentageDifference2 >= 0) ? '+' : ''; ?><?php echo number_format($percentageDifference2, 2); ?>%
+                                </span>
+                                than the previous week
+                            </p>
                         </div>
                     </div>
                 </div>
@@ -81,10 +116,10 @@ if (isset($_SESSION['username'])) {
                     <div class="card">
                         <div class="card-header p-3 pt-2">
                             <div class="icon icon-lg icon-shape bg-gradient-info shadow-info text-center border-radius-xl mt-n4 position-absolute">
-                                <i class="material-icons opacity-10">weekend</i>
+                                <i class="material-icons opacity-10">people</i>
                             </div>
                             <div class="text-end pt-1">
-                                <p class="text-sm mb-0 text-capitalize">Sales</p>
+                                <p class="text-sm mb-0 text-capitalize">Petugas</p>
                                 <h4 class="mb-0"><?php echo $jumlah_target3; ?></h4>
                             </div>
                         </div>
