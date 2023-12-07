@@ -53,7 +53,7 @@ if (isset($_GET['proses'])) {
         $pmet = $_FILES['pmet']['name'];
         $nama_file_baru = $idpel . ".jpg";
 
-        move_uploaded_file($_FILES['pmet']['tmp_name'], '../file/' . $nama_file_baru);
+        move_uploaded_file($_FILES['pmet']['tmp_name'], '../assets/img/datpel/' . $nama_file_baru);
         $ket = $_POST["ket"];
         $ket2 = $_POST["ket2"];
 
