@@ -31,6 +31,61 @@ if (isset($_SESSION['username'])) {
 }
 ?>
 
+<style>
+  .modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    padding-top: 100px;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.6);
+  }
+
+  .modal-header {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-align: start;
+    align-items: flex-start;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    padding: 1rem;
+    border-bottom: 1px solid #e9ecef;
+    border-top-left-radius: calc(0.3rem - 1px);
+    border-top-right-radius: calc(0.3rem - 1px);
+  }
+
+  .modal-content {
+    display: block;
+    margin: 0 auto;
+    max-width: 22%;
+  }
+
+  .modal-body {
+    position: relative;
+    -ms-flex: 1 1 auto;
+    flex: 1 1 auto;
+    padding: 1rem;
+  }
+
+  .close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    color: #fff;
+    font-size: 24px;
+    font-weight: bold;
+    cursor: pointer;
+  }
+
+  .foto-user {
+    border-radius: 150px;
+  }
+</style>
+
 <body class="g-sidenav-show bg-gray-200">
   <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg">
     <div class="container-fluid py-4">
@@ -172,6 +227,24 @@ if (isset($_SESSION['username'])) {
   <?php
   include '../assets/layouts/setting.php'
   ?>
+  <script>
+    function openImportPopup() {
+      var importPopup = document.getElementById('importPopup');
+      importPopup.style.display = "block";
+    }
+
+    function closeImportPopup() {
+      var importPopup = document.getElementById('importPopup');
+      importPopup.style.display = "none";
+    }
+
+    window.addEventListener("click", function(event) {
+      var importPopup = document.getElementById('importPopup');
+      if (event.target == importPopup) {
+        closeImportPopup();
+      }
+    });
+  </script>
 </body>
 <script src="../assets/js/core/popper.min.js"></script>
 <script src="../assets/js/core/bootstrap.min.js"></script>
