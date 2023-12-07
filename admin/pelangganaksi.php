@@ -32,7 +32,7 @@ if (isset($_GET['aksi'])) {
                                     </div>
                                 </div>
                                 <div class="card-body px-0 pb-2">
-                                    <div class="card-body">
+                                    <div class="card-body pt-0 mt-0">
                                         <form class="myForm" action="pelangganproses.php?proses=prosestambah" method="post" enctype="multipart/form-data" autocomplete="off" required>
                                             <div class="input-group input-group-outline my-3">
                                                 <label for="">Tanggal</label>
