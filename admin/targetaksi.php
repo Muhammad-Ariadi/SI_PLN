@@ -14,7 +14,7 @@ if (isset($_GET['aksi'])) {
         $kd_akun_user = $_SESSION['kd_akun_user'];
         $tanggal_dipilih = date('Y-m-d');
 
-        $alert_message = "Mohon untuk Mengaktifkan Location dan Membuka Aplikasi Gmaps Terlebih Dahulu Agar Memperkuat Akurasi Titik Koordinat!";
+        $alert_message = "Isi Data Target";
 ?>
 
         <style>
@@ -51,17 +51,17 @@ if (isset($_GET['aksi'])) {
                                     </div>
                                 </div>
                                 <div class="card-body px-0 pb-2">
-                                    <div class="card-body">
-                                        <form class="myForm" action="pelangganproses.php?proses=prosestambah" method="post" enctype="multipart/form-data" autocomplete="off" required>
+                                    <div class="card-body pt-0 mt-0">
+                                        <form class="myForm" action="targetproses.php?proses=prosestambah" method="post" enctype="multipart/form-data" autocomplete="off" required>
                                             <div class="input-group input-group-outline my-3">
-                                                <label for="">Tanggal</label>
+                                                <label for="">Tanggal </label>
                                                 <div class="input-group">
-                                                    <input type="text" name="tanggal" class="form-control" value="<?php echo date('Y-m-d'); ?>" readonly>
+                                                    <input type="text" name="tanggal" class="form-control" value="<?php echo date('Y-m-d'); ?>" readonly disabled>
                                                     <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
                                                 </div>
                                             </div>
                                             <div class="input-group input-group-outline my-3">
-                                                <label for="">Tanggal</label>
+                                                <label for="">Tanggal Akhir</label>
                                                 <div class="input-group">
                                                     <input type="date" name="tanggal_akhir" class="form-control" value="<?php echo $tanggal_dipilih; ?>">
                                                 </div>
