@@ -11,7 +11,7 @@ if (isset($_SESSION['username'])) {
     $data = $query->fetch_assoc();
     $nama_lengkap = $data['nama_lengkap'];
     $imagePath = $data['foto'];
-    $fotoProfilPath = '../assets/img/' . $imagePath;
+    $fotoProfilPath = '../assets/img/akun/' . $imagePath;
 
     if ($level == '0') {
         $queryTarget = $db->query("SELECT COUNT(*) as jumlah_target FROM tbl_pelanggan");
@@ -56,9 +56,48 @@ if (isset($_SESSION['username'])) {
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
     <!-- CSS Files -->
     <link id="pagestyle" href="../assets/css/material-dashboard.css?v=3.1.0" rel="stylesheet" />
-    <!-- Nepcha Analytics (nepcha.com) -->
-    <!-- Nepcha is a easy-to-use web analytics. No cookies and fully compliant with GDPR, CCPA and PECR. -->
+
     <script defer data-site="YOUR_DOMAIN_HERE" src="https://api.nepcha.com/js/nepcha-analytics.js"></script>
+
+    <style>
+        /* Style untuk dropdown */
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f9f9f9;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+            z-index: 1;
+            left: -80px;
+            /* Sesuaikan nilai left sesuai kebutuhan */
+        }
+
+        .dropdown-content img {
+            width: 40px;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+
+        .dropdown-content a {
+            display: block;
+            padding: 10px;
+            text-decoration: none;
+            color: #333;
+        }
+
+        .dropdown-content a:hover {
+            background-color: #ddd;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+    </style>
 </head>
 
 <body class="g-sidenav-show  bg-gray-200">
@@ -125,18 +164,36 @@ if (isset($_SESSION['username'])) {
                     </ol>
                     <h6 class="font-weight-bolder mb-0"><?php echo $pageTitle; ?></h6>
                 </nav>
-                <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
-                    <div class="ms-md-auto pe-md-3 d-flex align-items-center">
+                <div class="ms-md-auto pe-md-3 d-flex align-items-center">
+                    <div class="dropdown">
+                        <img class="foto-user" style="border-radius: 100px; cursor: pointer;" width="40px" src="<?php echo $fotoProfilPath; ?>" alt="User profile picture" onclick="toggleDropdown()">
+                        <div id="profileDropdown" class="dropdown-content">
+                            <a href="#">Profile</a>
+                            <a href="#">Settings</a>
+                            <a href="logout.php">Logout</a>
+                        </div>
                     </div>
-                    <li class="nav-item d-flex align-items-center">
-                        <a class="nav-link text-body font-weight-bold px-0">
-                            <i class="fa fa-user me-sm-1"></i>
-                            <span class="d-sm-inline d-none"><?php echo $data['nama_lengkap']; ?></span>
-                        </a>
-                    </li>
-                    </ul>
                 </div>
             </div>
         </nav>
         <!-- End Navbar -->
 </body>
+<script>
+    function toggleDropdown() {
+        var dropdown = document.getElementById("profileDropdown");
+        dropdown.classList.toggle("show");
+    }
+
+    // Tutup dropdown jika pengguna mengklik di luar dropdown
+    window.onclick = function(event) {
+        if (!event.target.matches('.foto-user')) {
+            var dropdowns = document.getElementsByClassName("dropdown-content");
+            for (var i = 0; i < dropdowns.length; i++) {
+                var openDropdown = dropdowns[i];
+                if (openDropdown.classList.contains('show')) {
+                    openDropdown.classList.remove('show');
+                }
+            }
+        }
+    }
+</script>
