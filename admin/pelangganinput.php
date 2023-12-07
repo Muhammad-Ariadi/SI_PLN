@@ -93,6 +93,10 @@ $tampil = mysqli_query($db, $hasil);
                                 <div class="row">
                                     <div class="col">
                                         <a href="pelangganaksi.php?aksi=tambah" class="btn btn-primary">Tambah data</a>
+                                        <a href="excel.php" target="_blank">
+                                            <button class="btn btn-success">Excel</button>
+                                        </a>
+                                        <!-- <button class="btn btn-success ml-2" onclick="openImportPopup()">Import Data</button> -->
                                     </div>
                                 </div>
                                 <table id="example" class="table table-striped" style="width:100%">
@@ -223,7 +227,7 @@ $tampil = mysqli_query($db, $hasil);
         $(document).ready(function() {
             var table = $('#example').DataTable({
                 lengthChange: false,
-                buttons: ['excel', 'colvis']
+                buttons: ['colvis']
             });
 
             table.buttons().container()
