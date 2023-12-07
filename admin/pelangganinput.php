@@ -102,19 +102,18 @@ $tampil = mysqli_query($db, $hasil);
                                 <table id="example" class="table table-striped" style="width:100%">
                                     <thead>
                                         <tr>
-                                            <th>Idpel</th>
-                                            <th>Nama</th>
-                                            <th>Daya</th>
-                                            <th>Tipe</th>
-                                            <th>Lokasi</th>
-                                            <th>Pmet</th>
-                                            <th>Merek</th>
-                                            <th>tipe meter</th>
-                                            <th>Nomer Meter</th>
-                                            <th>Keterangan</th>
-                                            <th>Rincian</th>
-                                            <th>Opsi</th>
-
+                                            <th class="text-center">ID</th>
+                                            <th class="text-center">NAMA</th>
+                                            <th class="text-center">DAYA</th>
+                                            <th class="text-center">PEMBAYARAN</th>
+                                            <th class="text-center">LOKASI</th>
+                                            <th class="text-center">FOTO</th>
+                                            <th class="text-center">MERK</th>
+                                            <th class="text-center">TIPE</th>
+                                            <th class="text-center">NOMOR METER</th>
+                                            <th class="text-center">KETERANGAN</th>
+                                            <th class="text-center">RINCIAN</th>
+                                            <th class="text-center">OPSI</th>
                                         </tr>
                                     </thead>
                                     </thead>
@@ -123,8 +122,8 @@ $tampil = mysqli_query($db, $hasil);
                                         $counter = 1;
                                         while ($d = $tampil->fetch_array()) {
                                         ?>
-                                            <tr>
-                                                <td style="max-width: 120px; white-space: normal;">
+                                            <tr class=" text-center">
+                                                <td style="max-width: 120px; white-space: normal; ">
                                                     <?php echo $d['idpel'] ?>
                                                 </td>
 
@@ -168,7 +167,7 @@ $tampil = mysqli_query($db, $hasil);
                                                     <?php echo $d['ket'] ?>
                                                 </td>
 
-                                                <td style="max-width: 400px; white-space: normal;">
+                                                <td style="max-width: 100px; white-space: normal;">
                                                     <?php echo $d['ket2'] ?>
                                                 </td>
 
