@@ -233,6 +233,12 @@ $tampil = mysqli_query($db, $hasil);
                 .appendTo('#example_wrapper .col-md-6:eq(0)');
         });
 
+        function hapusData(idpelanggan) {
+            if (confirm('Apakah Anda yakin ingin menghapus data ini?')) {
+                window.location.href = 'pelangganproses.php?kode=' + idpelanggan + '&proses=proseshapus';
+            }
+        }
+
         var currentZoom = 1;
         var pointerOffsetX = 0;
         var pointerOffsetY = 0;
