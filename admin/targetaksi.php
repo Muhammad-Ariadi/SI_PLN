@@ -18,16 +18,6 @@ if (isset($_GET['aksi'])) {
 ?>
 
         <style>
-            .form-group {
-                margin-top: 10px;
-
-            }
-
-            .container-xl {
-                max-width: 1705px;
-                /* Atur lebar maksimum kontainer sesuai dengan preferensi Anda */
-            }
-
             .row {
                 width: 100%;
             }
@@ -56,7 +46,7 @@ if (isset($_GET['aksi'])) {
                                             <div class="input-group input-group-outline my-3">
                                                 <label for="">Tanggal </label>
                                                 <div class="input-group">
-                                                    <input type="text" name="tanggal" class="form-control" value="<?php echo date('Y-m-d'); ?>" readonly disabled>
+                                                    <input type="text" name="tanggal" class="form-control" value="<?php echo date('Y-m-d'); ?>" readonly>
                                                     <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
                                                 </div>
                                             </div>

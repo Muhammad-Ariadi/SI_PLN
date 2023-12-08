@@ -30,31 +30,29 @@ if (isset($_SESSION['username'])) {
         $dataTarget3 = $queryTarget3->fetch_assoc();
         $jumlah_target3 = $dataTarget3['jumlah_akun'];
 
-        $previousMonth = date('Y-m', strtotime('-1 month'));
-        $queryPreviousMonth = $db->query("SELECT COUNT(*) as jumlah_perbandingan FROM tbl_target WHERE status='0' AND MONTH(tanggal) = MONTH('$previousMonth') AND YEAR(tanggal) = YEAR('$previousMonth')");
-        $dataPreviousMonth = $queryPreviousMonth->fetch_assoc();
-        $jumlah_perbandingan = $dataPreviousMonth['jumlah_perbandingan'];
+        $previousWeekStart = date('Y-m-d', strtotime('-1 week', strtotime('last Sunday')));
+        $previousWeekEnd = date('Y-m-d', strtotime('-1 day', strtotime('this Sunday')));
+
+        $queryPreviousWeek = $db->query("SELECT COUNT(*) as jumlah_perbandingan FROM tbl_target WHERE status='0' AND tanggal BETWEEN '$previousWeekStart' AND '$previousWeekEnd'");
+        $dataPreviousWeek = $queryPreviousWeek->fetch_assoc();
+        $jumlah_perbandingan = $dataPreviousWeek['jumlah_perbandingan'];
+
         if ($jumlah_perbandingan > 0) {
             $percentageDifference = (($jumlah_target - $jumlah_perbandingan) / $jumlah_perbandingan) * 100;
         } else {
             $percentageDifference = 0;
         }
 
-        $previousWeekStart = date('Y-m-d', strtotime('-1 week', strtotime('last Sunday')));
-        $previousWeekEnd = date('Y-m-d', strtotime('-1 day', strtotime('this Sunday')));
-
-        $queryPreviousWeek = $db->query("SELECT COUNT(*) as jumlah_perbandingan2 FROM tbl_target WHERE status='1' AND tanggal BETWEEN '$previousWeekStart' AND '$previousWeekEnd'");
-        $dataPreviousWeek = $queryPreviousWeek->fetch_assoc();
-        $jumlah_perbandingan2 = $dataPreviousWeek['jumlah_perbandingan2'];
+        $previousDay = date('Y-m-d', strtotime('-1 day'));
+        $queryPreviousDay = $db->query("SELECT COUNT(*) as jumlah_perbandingan2 FROM tbl_target WHERE status='1' AND DATE(tanggal) = '$previousDay'");
+        $dataPreviousDay = $queryPreviousDay->fetch_assoc();
+        $jumlah_perbandingan2 = $dataPreviousDay['jumlah_perbandingan2'];
 
         if ($jumlah_perbandingan2 > 0) {
             $percentageDifference2 = (($jumlah_target - $jumlah_perbandingan2) / $jumlah_perbandingan2) * 100;
         } else {
             $percentageDifference2 = 0;
         }
-
-
-
         $nama = "$nama_lengkap";
         $role = "$level";
     }
@@ -68,6 +66,23 @@ if (isset($_SESSION['username'])) {
     <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg">
         <div class="container-fluid py-4 mb-4">
             <div class="row">
+                <div class="col-xl-4 col-sm-6">
+                    <div class="card">
+                        <div class="card-header p-3 pt-2">
+                            <div class="icon icon-lg icon-shape bg-gradient-info shadow-info text-center border-radius-xl mt-n4 position-absolute">
+                                <i class="material-icons opacity-10">groups</i>
+                            </div>
+                            <div class="text-end pt-1">
+                                <p class="text-sm mb-0 text-capitalize">Petugas</p>
+                                <h4 class="mb-0"><?php echo $jumlah_target3; ?></h4>
+                            </div>
+                        </div>
+                        <hr class="dark horizontal my-0">
+                        <div class="card-footer p-3">
+                            <p class="mb-0"><span class="text-success text-sm font-weight-bolder">+5% </span>than yesterday</p>
+                        </div>
+                    </div>
+                </div>
                 <div class="col-xl-4 col-sm-6 mb-xl-0 mb-4">
                     <div class="card">
                         <div class="card-header p-3 pt-2">
@@ -94,7 +109,7 @@ if (isset($_SESSION['username'])) {
                     <div class="card">
                         <div class="card-header p-3 pt-2">
                             <div class="icon icon-lg icon-shape bg-gradient-success shadow-success text-center border-radius-xl mt-n4 position-absolute">
-                                <i class="material-icons opacity-10">person</i>
+                                <i class="material-icons opacity-10">check</i>
                             </div>
                             <div class="text-end pt-1">
                                 <p class="text-sm mb-0 text-capitalize">Success</p>
@@ -112,23 +127,7 @@ if (isset($_SESSION['username'])) {
                         </div>
                     </div>
                 </div>
-                <div class="col-xl-4 col-sm-6">
-                    <div class="card">
-                        <div class="card-header p-3 pt-2">
-                            <div class="icon icon-lg icon-shape bg-gradient-info shadow-info text-center border-radius-xl mt-n4 position-absolute">
-                                <i class="material-icons opacity-10">people</i>
-                            </div>
-                            <div class="text-end pt-1">
-                                <p class="text-sm mb-0 text-capitalize">Petugas</p>
-                                <h4 class="mb-0"><?php echo $jumlah_target3; ?></h4>
-                            </div>
-                        </div>
-                        <hr class="dark horizontal my-0">
-                        <div class="card-footer p-3">
-                            <p class="mb-0"><span class="text-success text-sm font-weight-bolder">+5% </span>than yesterday</p>
-                        </div>
-                    </div>
-                </div>
+
             </div>
         </div>
     </main>
