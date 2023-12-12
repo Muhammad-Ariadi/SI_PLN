@@ -51,7 +51,7 @@ if (isset($_SESSION['username'])) {
                                 <i class="material-icons opacity-10">storage</i>
                             </div>
                             <div class="text-end pt-1">
-                                <p class="text-sm mb-0 text-capitalize">Petugas</p>
+                                <p class="text-sm mb-0 text-capitalize">Database</p>
                                 <h4 class="mb-0"><?php echo $jumlah_target3; ?></h4>
                             </div>
                         </div>

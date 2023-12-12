@@ -131,25 +131,29 @@ if (isset($_SESSION['username'])) {
                         <span class="nav-link-text ms-1">Pelanggan</span>
                     </a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link text-white <?php echo ($pageTitle === 'Target') ? 'active bg-gradient-primary' : ''; ?>" href="targetinput.php">
-                        <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                            <i class="material-icons opacity-10">receipt_long</i>
-                        </div>
-                        <span class="nav-link-text ms-1">Target</span>
-                    </a>
-                </li>
-                <li class="nav-item mt-3">
-                    <h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">Halaman Akun</h6>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-white <?php echo ($pageTitle === 'Petugas') ? 'active bg-gradient-primary' : ''; ?>" href="akuninput.php">
-                        <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                            <i class="material-icons opacity-10">person</i>
-                        </div>
-                        <span class="nav-link-text ms-1">Petugas </span>
-                    </a>
-                </li>
+
+                <!-- ini bagian untuk membatasi navbar untuk admin dan petugas -->
+                <?php if ($level == '0') : ?>
+                    <li class="nav-item">
+                        <a class="nav-link text-white <?php echo ($pageTitle === 'Target') ? 'active bg-gradient-primary' : ''; ?>" href="targetinput.php">
+                            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                                <i class="material-icons opacity-10">receipt_long</i>
+                            </div>
+                            <span class="nav-link-text ms-1">Target</span>
+                        </a>
+                    </li>
+                    <li class="nav-item mt-3">
+                        <h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">Halaman Akun</h6>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white <?php echo ($pageTitle === 'Petugas') ? 'active bg-gradient-primary' : ''; ?>" href="akuninput.php">
+                            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                                <i class="material-icons opacity-10">person</i>
+                            </div>
+                            <span class="nav-link-text ms-1">Petugas </span>
+                        </a>
+                    </li>
+                <?php endif; ?>
             </ul>
         </div>
     </aside>
@@ -168,7 +172,7 @@ if (isset($_SESSION['username'])) {
                     <div class="dropdown">
                         <img class="foto-user" style="border-radius: 100px; cursor: pointer;" width="40px" src="<?php echo $fotoProfilPath; ?>" alt="User profile picture" onclick="toggleDropdown()">
                         <div id="profileDropdown" class="dropdown-content">
-                            <a href="#"><?php echo $nama; ?></a>
+                            <a href="#"><?php echo $nama_lengkap; ?></a>
                             <a href="logout.php">Logout</a>
                         </div>
                     </div>
@@ -197,15 +201,14 @@ if (isset($_SESSION['username'])) {
 
     // Tutup dropdown jika pengguna mengklik di luar dropdown
     window.onclick = function(event) {
-            if (!event.target.matches('.foto-user')) {
-                var dropdowns = document.getElementsByClassName("dropdown-content");
-                for (var i = 0; i < dropdowns.length; i++) {
-                    var openDropdown = dropdowns[i];
-                    if (openDropdown.classList.contains('show')) {
-                        openDropdown.classList.remove('show');
-                    }
+        if (!event.target.matches('.foto-user')) {
+            var dropdowns = document.getElementsByClassName("dropdown-content");
+            for (var i = 0; i < dropdowns.length; i++) {
+                var openDropdown = dropdowns[i];
+                if (openDropdown.classList.contains('show')) {
+                    openDropdown.classList.remove('show');
                 }
             }
         }
-
+    }
 </script>

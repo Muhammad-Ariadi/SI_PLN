@@ -204,6 +204,7 @@ $tampil = mysqli_query($db, $hasil);
             </div>
         </div>
     </main>
+</body>
     <?php
     include '../assets/layouts/setting.php'
     ?>
