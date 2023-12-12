@@ -1,5 +1,5 @@
 <?php
-$pageTitle = "Tambah Data Target";
+$pageTitle = "Data Detail Target";
 include '../assets/layouts/sidebar.php';
 
 

@@ -182,7 +182,7 @@ if (isset($_GET['aksi'])) {
                                         $data = $db->query("SELECT * From tbl_target where idpel='$_GET[kode]'");
                                         while ($d = mysqli_fetch_array($data)) {
                                         ?>
-                                            <form class="myForm" action="targetproses.php?proses=ubah&kode=<?php echo $d['idpel']; ?>" method="post" enctype="multipart/form-data" required>
+                                            <form class="formedit" action="targetproses.php?proses=ubah&kode=<?php echo $d['idpel']; ?>" method="post" enctype="multipart/form-data" required>
                                                 <div class="row">
                                                     <div class="col-md-6">
                                                         <label for="">Tanggal Awal</label>
@@ -261,7 +261,7 @@ if (isset($_GET['aksi'])) {
                                                 </div>
                                                 <div class="modal-footer">
                                                     <a href="targetinput.php" class="btn btn-primary">Kembali</a>
-                                                    <button type="submit" class="btn btn-success" name="submit" onclick="confirmSubmit()">Submit</button>
+                                                    <button type="submit" class="btn btn-success" name="submit" onclick="confirmUpdate()">Submit</button>
                                                 </div>
                                             </form>
                                             <script>

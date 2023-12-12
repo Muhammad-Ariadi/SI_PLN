@@ -18,7 +18,7 @@ if (isset($_GET['proses']) && $_GET['proses'] == 'prosestambah') {
           VALUES ('$tanggal','$tanggal_akhir','$kd_akun', '$idpel','$nama_pel', '$rbm','$tipe','$alamat','$latitude', '$longitude' , '$status')";
     mysqli_query($db, $query);
     echo '<script>window.location.href = "targetinput.php";</script>';
-
+    
 } elseif ($_GET['proses'] == 'ubah') {
     $kd_akun = $_POST['kd_akun'];
     $tanggal = $_POST['tanggal'];
@@ -41,8 +41,6 @@ if (isset($_GET['proses']) && $_GET['proses'] == 'prosestambah') {
         echo "<script>alert('Update gagal: " . mysqli_error($db) . "');</script>";
         echo '<script>window.location.href = "targetdetail.php";</script>';
     }
-
-    
 } elseif ($_GET['proses'] == 'proseshapus') {
     $idpel = $_GET['kode'];
 
