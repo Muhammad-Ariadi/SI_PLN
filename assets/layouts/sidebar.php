@@ -168,8 +168,7 @@ if (isset($_SESSION['username'])) {
                     <div class="dropdown">
                         <img class="foto-user" style="border-radius: 100px; cursor: pointer;" width="40px" src="<?php echo $fotoProfilPath; ?>" alt="User profile picture" onclick="toggleDropdown()">
                         <div id="profileDropdown" class="dropdown-content">
-                            <a href="#">Profile</a>
-                            <a href="#">Settings</a>
+                            <a href="#"><?php echo $nama; ?></a>
                             <a href="logout.php">Logout</a>
                         </div>
                     </div>

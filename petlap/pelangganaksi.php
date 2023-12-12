@@ -10,8 +10,15 @@ if (!isset($_SESSION['kd_akun_user'])) {
 if (isset($_GET['aksi'])) {
     if ($_GET['aksi'] == 'tambah') {
         $kd_akun_user = $_SESSION['kd_akun_user'];
+        $tanggal_dipilih = $_GET['tanggal_dipilih'];
 
         $alert_message = "Mohon untuk Mengaktifkan Location dan Membuka Aplikasi Gmaps Terlebih Dahulu Agar Memperkuat Akurasi Titik Koordinat!";
+
+        $idpelanggan = $_GET['idpel']; // Anda sudah mengambilnya dari $_GET
+
+        // Lakukan kueri ke database
+        $query = "SELECT * FROM tbl_target WHERE idpel = '$idpelanggan'";
+        $result = mysqli_query($db, $query);
 ?>
 
         <body class="g-sidenav-show bg-gray-200">
@@ -45,14 +52,14 @@ if (isset($_GET['aksi'])) {
                                                 <label for="">ID Pelanggan</label>
                                                 <p style="font-size: 10px; color: red;"><i>*Mohon isi ID pelanggan dengan benar</i></p>
                                                 <div class="input-group">
-                                                    <input type="text" name="idpel" class="form-control" value="" placeholder="Masukkan ID Pelanggan Minimal 11 Angka dan Maksimal 12 Angka" autofocus minlength="11" maxlength="12" required>
+                                                    <input type="text" name="idpel" class="form-control" value="<?php echo isset($_GET['idpel']) ? htmlspecialchars($_GET['idpel']) : ''; ?>" placeholder="Masukkan ID Pelanggan Minimal 11 Angka dan Maksimal 12 Angka" autofocus minlength="11" maxlength="12" required>
                                                     <span class="input-group-addon"><i class="glyphicon glyphicon-barcode"></i></span>
                                                 </div>
                                             </div>
                                             <div class="input-group input-group-outline my-3">
                                                 <label for="">Nama Pelanggan</label>
                                                 <div class="input-group">
-                                                    <input type="text" name="nama_pel" class="form-control" value="" placeholder="Masukkan Nama Pelanggan" required minlength="2">
+                                                    <input type="text" name="nama_pel" class="form-control" value="<?php echo $nama_pel; ?>" placeholder="Masukkan Nama Pelanggan" required minlength="2" maxlength="50">
                                                     <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
                                                 </div>
                                             </div>
