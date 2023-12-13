@@ -34,7 +34,7 @@ $data_total = mysqli_fetch_assoc($result_total_data);
 $total_data = $data_total['total_data'];
 
 // Tentukan jumlah data per halaman
-$data_per_page = 1;
+$data_per_page = 10;
 
 // Hitung jumlah halaman yang dibutuhkan
 $total_pages = ceil($total_data / $data_per_page);
