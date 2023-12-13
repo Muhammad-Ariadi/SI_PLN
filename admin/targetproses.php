@@ -18,6 +18,7 @@ if (isset($_GET['proses']) && $_GET['proses'] == 'prosestambah') {
           VALUES ('$tanggal','$tanggal_akhir','$kd_akun', '$idpel','$nama_pel', '$rbm','$tipe','$alamat','$latitude', '$longitude' , '$status')";
     mysqli_query($db, $query);
     echo '<script>window.location.href = "targetinput.php";</script>';
+    
 } elseif ($_GET['proses'] == 'ubah') {
     $kd_akun = $_POST['kd_akun'];
     $tanggal = $_POST['tanggal'];
@@ -32,11 +33,7 @@ if (isset($_GET['proses']) && $_GET['proses'] == 'prosestambah') {
     $longitude = $_POST["longitude"];
 
     $hasil = $db->query("UPDATE tbl_target set tanggal='$tanggal', tanggal_akhir='$tanggal_akhir', nama_pel='$nama_pel', rbm='$rbm',tipe='$tipe',alamat='$alamat',latitude='$latitude', longitude='$longitude',status='$status' where idpel='$idpel'");
-    // if ($hasil) {
-    //     echo "<script>alert('Update berhasil');</script>";
-    // } else {
-    //     echo "<script>alert('Update gagal: " . mysqli_error($db) . "');</script>";
-    // }
+   
     if ($hasil) {
         echo "<script>alert('Update berhasil');</script>";
         echo "<script>window.location.href = 'targetdetail.php?kd_akun=$kd_akun';</script>";

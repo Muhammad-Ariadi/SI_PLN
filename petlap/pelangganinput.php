@@ -1,39 +1,9 @@
 <?php
 $pageTitle = "Pelanggan";
-include '../assets/layouts/sidebar_petlap.php';
-$hasil = "SELECT * FROM tbl_target ";
-
-if (!isset($_SESSION['kd_akun_user'])) {
-    // Jika tidak, mungkin redirect ke halaman login atau lakukan tindakan lain
-    header("Location: index.php");
-    exit();
-}
-// Ambil kd_akun_user dari sesi
-$kd_akun_user = $_SESSION['kd_akun_user'];
-
-// Inisialisasi tanggal hari ini jika tidak ada tanggal yang dipilih
-if (isset($_POST['tanggal'])) {
-    $_SESSION['tanggal_dipilih'] = $_POST['tanggal'];
-} else if (!isset($_SESSION['tanggal_dipilih'])) {
-    $_SESSION['tanggal_dipilih'] = date('Y-m-d');
-}
-
-$tanggal_dipilih = $_SESSION['tanggal_dipilih'];
-
-$query_hitung_data_input = "SELECT COUNT(*) as jumlah_data FROM tbl_pelanggan WHERE tanggal = '$tanggal_dipilih' AND kd_akun = '$kd_akun_user'";
-$result_hitung_data_input = mysqli_query($db, $query_hitung_data_input);
-$data_hitung_input = mysqli_fetch_assoc($result_hitung_data_input);
-$jumlah_data = $data_hitung_input['jumlah_data'];
-
-
-// Hitung jumlah total data yang akan ditampilkan
-$query_total_data = "SELECT COUNT(*) as total_data FROM tbl_target WHERE kd_akun = '$kd_akun_user' AND ('$tanggal_dipilih' BETWEEN tanggal AND tanggal_akhir)";
-$result_total_data = mysqli_query($db, $query_total_data);
-$data_total = mysqli_fetch_assoc($result_total_data);
-$total_data = $data_total['total_data'];
+include '../assets/layouts/sidebar.php';
+$hasil = "SELECT * FROM tbl_pelanggan ";
 
 $tampil = mysqli_query($db, $hasil);
-
 ?>
 
 <link href="../assets/DataTables/DataTables-1.13.8/css/dataTables.bootstrap5.min.css" rel="stylesheet" />
@@ -114,7 +84,7 @@ $tampil = mysqli_query($db, $hasil);
                     <div class="card my-4">
                         <div class="card-header p-0 position-relative mt-n4 mx-3">
                             <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
-                                <h6 class="text-white text-capitalize ps-3">Pelanggan</h6>
+                                <h6 class="text-white text-capitalize ps-3">INPUT DATA PELANGGAN</h6>
                             </div>
                         </div>
                         <div class="card-body px-0 pb-2">
@@ -123,27 +93,29 @@ $tampil = mysqli_query($db, $hasil);
                                     <a href="pelangganaksi2.php?aksi=tambah&kd_akun_user=<?php echo $kd_akun_user; ?>&tanggal_dipilih=<?php echo $tanggal_dipilih; ?>" class="btn btn-primary" id="button_target">Tambah Data</a>
                                 </div>
                                 <div class="row">
-                                    <form method="post" class="col">
-                                        <div class="form-group">
-                                            <label for="tanggal"><strong>Pilih Tanggal:</strong></label>
-                                            <div class="d-flex">
-                                                <input type="date" name="tanggal" class="form-control mr-2" style="width: 220px; margin-right: 180px ;" value="<?php echo $tanggal_dipilih; ?>">
-                                                <button type="submit" class="btn btn-success">Pilih</button>
-                                            </div>
-                                        </div>
-                                    </form>
-                                </div>
-                                <br>
-                                <div>
-                                    <p><strong>Tanggal Dipilih : <?php echo $tanggal_dipilih; ?></strong></p>
-                                    <p><strong>Jumlah Data yang di input : <?php echo $jumlah_data; ?></strong></p>
+                                    <div class="col">
+                                        <a href="pelangganaksi.php?aksi=tambah" class="btn btn-primary">Tambah data</a>
+                                        <a href="excel.php" target="_blank">
+                                            <button class="btn btn-success">Excel</button>
+                                        </a>
+                                        <!-- <button class="btn btn-success ml-2" onclick="openImportPopup()">Import Data</button> -->
+                                    </div>
                                 </div>
                                 <table id="example" class="table table-striped" style="width:100%">
                                     <thead>
                                         <tr>
-                                            <th class="text-center">ID PELANGGAN</th>
-                                            <th class="text-center">RBM</th>
-                                            <th class="text-center">MAPS</th>
+                                            <th class="text-center">ID</th>
+                                            <th class="text-center">NAMA</th>
+                                            <th class="text-center">DAYA</th>
+                                            <th class="text-center">PEMBAYARAN</th>
+                                            <th class="text-center">LOKASI</th>
+                                            <th class="text-center">FOTO</th>
+                                            <th class="text-center">MERK</th>
+                                            <th class="text-center">TIPE</th>
+                                            <th class="text-center">NOMOR METER</th>
+                                            <th class="text-center">KETERANGAN</th>
+                                            <th class="text-center">RINCIAN</th>
+                                            <th class="text-center">OPSI</th>
                                         </tr>
                                     </thead>
                                     </thead>
@@ -152,9 +124,9 @@ $tampil = mysqli_query($db, $hasil);
                                         $counter = 1;
                                         while ($d = $tampil->fetch_array()) {
                                         ?>
-                                            <tr>
-                                                <td class="text-center">
-                                                    <a href="pelangganaksi.php?aksi=tambah&kd_akun_user=<?php echo $kd_akun_user; ?>&tanggal_dipilih=<?php echo $tanggal_dipilih; ?>&idpel=<?php echo $d['idpel']; ?>"><?php echo $d['idpel']; ?></a>
+                                            <tr class=" text-center">
+                                                <td style="max-width: 120px; white-space: normal; ">
+                                                    <?php echo $d['idpel'] ?>
                                                 </td>
                                                 <td class="text-center"><?php echo $d['rbm']; ?></td>
                                                 <td class="text-center">

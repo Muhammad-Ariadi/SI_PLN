@@ -182,27 +182,7 @@ if (isset($_GET['aksi'])) {
                                         $data = $db->query("SELECT * From tbl_target where idpel='$_GET[kode]'");
                                         while ($d = mysqli_fetch_array($data)) {
                                         ?>
-                                            <form class="formedit" action="targetproses.php?proses=ubah&kode=<?php echo $d['idpel']; ?>" method="post" enctype="multipart/form-data" required>
-                                                <div class="row">
-                                                    <div class="col-md-6">
-                                                        <label for="">Tanggal Awal</label>
-                                                        <div class="input-group input-group-outline">
-                                                            <input type="text" name="tanggal" class="form-control" value="<?php echo date('Y-m-d'); ?>" readonly>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-6">
-                                                        <label for="">Tanggal Akhir</label>
-                                                        <div class="input-group input-group-outline">
-                                                            <input type="date" name="tanggal_akhir" class="form-control" value="<?php echo $tanggal_dipilih; ?>">
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="input-group input-group-outline my-3">
-                                                    <label for="kd_akun">Akun Tujuan</label>
-                                                    <div class="input-group">
-                                                        <input type="text" name="kd_akun" class="form-control" value="<?php echo $d['kd_akun']; ?>" readonly>
-                                                    </div>
-                                                </div>
+                                            <form action="pelangganproses.php?proses=ubah&kode=<?php echo $d['idpel']; ?>" method="post" enctype="multipart/form-data">
                                                 <div class="input-group input-group-outline my-3">
                                                     <label for="">ID Pelanggan</label>
                                                     <p style="font-size: 10px; color: red;"><i>*Mohon isi ID pelanggan dengan benar</i></p>
