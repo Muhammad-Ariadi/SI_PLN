@@ -1,6 +1,6 @@
 <?php
 $pageTitle = "Dashboard";
-include '../assets/layouts/sidebar.php';
+include '../assets/layouts/sidebar_petlap.php';
 
 $jumlah_target = 0;
 $jumlah_target2 = 0;
