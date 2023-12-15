@@ -11,10 +11,25 @@ if (!isset($_SESSION['kd_akun_user'])) {
 // Ambil kd_akun_user dari sesi
 $kd_akun_user = $_SESSION['kd_akun_user'];
 
+if (isset($_POST['tanggal'])) {
+    $_SESSION['tanggal_dipilih'] = $_POST['tanggal'];
+} else if (!isset($_SESSION['tanggal_dipilih'])) {
+    $_SESSION['tanggal_dipilih'] = date('Y-m-d');
+}
+
+$tanggal_dipilih = $_SESSION['tanggal_dipilih'];
+
+$query_hitung_data_input = "SELECT COUNT(*) as jumlah_data FROM tbl_pelanggan WHERE tanggal = '$tanggal_dipilih' AND kd_akun = '$kd_akun_user'";
+$result_hitung_data_input = mysqli_query($db, $query_hitung_data_input);
+$data_hitung_input = mysqli_fetch_assoc($result_hitung_data_input);
+$jumlah_data = $data_hitung_input['jumlah_data'];
 
 
-
-
+// Hitung jumlah total data yang akan ditampilkan
+$query_total_data = "SELECT COUNT(*) as total_data FROM tbl_target WHERE kd_akun = '$kd_akun_user' AND ('$tanggal_dipilih' BETWEEN tanggal AND tanggal_akhir)";
+$result_total_data = mysqli_query($db, $query_total_data);
+$data_total = mysqli_fetch_assoc($result_total_data);
+$total_data = $data_total['total_data'];
 
 $hasil = "SELECT * FROM tbl_target ";
 
@@ -123,7 +138,7 @@ $tampil = mysqli_query($db, $hasil);
                                         ?>
                                             <tr class=" text-center">
                                                 <td style="max-width: 120px; white-space: normal; ">
-                                                    <?php echo $d['idpel'] ?>
+                                                    <a href="pelangganaksi.php?aksi=tambah&kd_akun_user=<?php echo $kd_akun_user; ?>&tanggal_dipilih=<?php echo $tanggal_dipilih; ?>&idpel=<?php echo $d['idpel']; ?>"><?php echo $d['idpel']; ?></a>
                                                 </td>
                                                 <td class="text-center"><?php echo $d['rbm']; ?></td>
                                                 <td class="text-center">
