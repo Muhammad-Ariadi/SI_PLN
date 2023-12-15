@@ -31,9 +31,17 @@ if (isset($_GET['aksi'])) {
                                     <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
                                         <h6 class="text-white text-capitalize ps-3">
                                             <center>
-                                                <?php if (isset($alert_message)) {
+                                                <?php
+                                                if (isset($alert_message)) {
                                                     echo '<div ">' . $alert_message . '</div>';
-                                                } ?>
+                                                }
+
+                                                if (mysqli_num_rows($result) > 0) {
+                                                    $row = mysqli_fetch_assoc($result);
+                                                    $nama_pel = $row['nama_pel'];
+                                                    $tipe_pembayaran = $row['tipe'];
+                                                    $alamat = $row['alamat'];
+                                                ?>
                                             </center>
                                         </h6>
                                     </div>
@@ -94,9 +102,16 @@ if (isset($_GET['aksi'])) {
                                                 <div class="input-group">
                                                     <select name="tipe" id="" class="form-control" required>
                                                         <option value="">Pilih Opsi</option>
-                                                        <option value="Pascabayar">Pascabayar</option>
-                                                        <option value="Prabayar">Prabayar</option>
+                                                        <option value="Pascabayar" <?php if ($tipe_pembayaran == 'Pascabayar') echo 'selected'; ?>>Pascabayar</option>
+                                                        <option value="Prabayar" <?php if ($tipe_pembayaran == 'Prabayar') echo 'selected'; ?>>Prabayar</option>
                                                     </select>
+                                                </div>
+                                            </div>
+                                            <div class="input-group input-group-outline my-3">
+                                                <label for="">Alamat</label>
+                                                <div class="input-group">
+                                                    <input type="text" name="alamat" class="form-control" placeholder="Masukkan Type kWh Meter" value="<?php echo $alamat; ?>" maxlength="100" require>
+                                                    <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
                                                 </div>
                                             </div>
                                             <div class="input-group input-group-outline my-3">
@@ -169,6 +184,12 @@ if (isset($_GET['aksi'])) {
                                                     <input type="text" name="nomet" class="form-control" placeholder="Masukkan Nomor Meter Minimal 11 Angka dan Maksimal 12 Angka" autofocus minlength="11" maxlength="12" require>
                                                 </div>
                                             </div>
+                                            <div class="form-group" hidden>
+                                                <label for="kd_akun">Status</label>
+                                                <div class="input-group">
+                                                    <input type="number" name="status" value="1" class="form-control">
+                                                </div>
+                                            </div>
                                             <div class="row">
                                                 <div class="col-md-6">
                                                     <label for="">Keterangan</label>
@@ -182,22 +203,21 @@ if (isset($_GET['aksi'])) {
                                                         </select>
                                                     </div>
                                                 </div>
-                                                <div class="col-md-6">
+                                                <div class="input-group input-group-outline my-3">
                                                     <label for="">Rincian</label>
                                                     <div class="input-group input-group-outline">
                                                         <input type="text" name="ket2" class="form-control" placeholder="Masukkan Jika Ada Keterangan Lebih Lanjut">
                                                     </div>
                                                 </div>
-                                            </div>
-                                            <div class="form-group" hidden>
-                                                <label for="">kode_akun</label>
-                                                <input type="text" name="kd_akun" class="form-control" value="<?php echo $kd_akun_user; ?>" readonly>
-                                            </div>
-                                            <br>
-                                            <div class="modal-footer">
-                                                <a href="pelangganinput.php" class="btn btn-primary">Kembali</a>
-                                                <button type="submit" class="btn btn-success" name="submit" onclick="confirmSubmit()">Submit</button>
-                                            </div>
+                                                <div class="form-group" hidden>
+                                                    <label for="">kode_akun</label>
+                                                    <input type="text" name="kd_akun" class="form-control" value="<?php echo $kd_akun_user; ?>" readonly>
+                                                </div>
+                                                <br>
+                                                <div class="modal-footer">
+                                                    <a href="pelangganinput.php" class="btn btn-primary">Kembali</a>
+                                                    <button type="submit" class="btn btn-success" name="submit" onclick="confirmSubmit()">Submit</button>
+                                                </div>
                                         </form>
                                         <script type="text/javascript">
                                             function toggleDayaInput() {
@@ -252,5 +272,6 @@ if (isset($_GET['aksi'])) {
         </body>
     <?php } ?>
 <?php
+    }
 }
 ?>
