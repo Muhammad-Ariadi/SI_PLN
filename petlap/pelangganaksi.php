@@ -3,7 +3,7 @@ $pageTitle = "Tambah Data Pelanggan";
 include '../assets/layouts/sidebar.php';
 
 if (!isset($_SESSION['kd_akun_user'])) {
-    header("Location: login.php");
+    header("Location: index.php");
     exit();
 }
 
