@@ -92,15 +92,6 @@ $tampil = mysqli_query($db, $hasil);
                                 <div class="mb-3">
                                     <a href="pelangganaksi2.php?aksi=tambah&kd_akun_user=<?php echo $kd_akun_user; ?>&tanggal_dipilih=<?php echo $tanggal_dipilih; ?>" class="btn btn-primary" id="button_target">Tambah Data</a>
                                 </div>
-                                <div class="row">
-                                    <div class="col">
-                                        <a href="pelangganaksi.php?aksi=tambah" class="btn btn-primary">Tambah data</a>
-                                        <a href="excel.php" target="_blank">
-                                            <button class="btn btn-success">Excel</button>
-                                        </a>
-                                        <!-- <button class="btn btn-success ml-2" onclick="openImportPopup()">Import Data</button> -->
-                                    </div>
-                                </div>
                                 <table id="example" class="table table-striped" style="width:100%">
                                     <thead>
                                         <tr>
