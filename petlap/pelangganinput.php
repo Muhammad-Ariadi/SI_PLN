@@ -31,80 +31,13 @@ $result_total_data = mysqli_query($db, $query_total_data);
 $data_total = mysqli_fetch_assoc($result_total_data);
 $total_data = $data_total['total_data'];
 
-$hasil = "SELECT * FROM tbl_target WHERE kd_akun = '$kd_akun_user' AND ('$tanggal_dipilih' BETWEEN tanggal AND tanggal_akhir)";
+$hasil = "SELECT * FROM tbl_target WHERE kd_akun = '$kd_akun_user' AND ('$tanggal_dipilih' BETWEEN tanggal AND tanggal_akhir) AND status = 0";
 $tampil = mysqli_query($db, $hasil);
 
 ?>
 
 <link href="../assets/DataTables/DataTables-1.13.8/css/dataTables.bootstrap5.min.css" rel="stylesheet" />
 <link href="../assets/DataTables/Buttons-2.4.2/css/buttons.bootstrap5.min.css " rel="stylesheet" />
-
-<style>
-    .modal {
-        display: none;
-        position: fixed;
-        z-index: 1;
-        padding-top: 100px;
-        left: 0;
-        top: 0;
-        width: 100%;
-        height: 100%;
-        overflow: auto;
-        background-color: rgba(0, 0, 0, 0.6);
-    }
-
-    .modal-header {
-        display: -ms-flexbox;
-        display: flex;
-        -ms-flex-align: start;
-        align-items: flex-start;
-        -ms-flex-pack: justify;
-        justify-content: space-between;
-        padding: 1rem;
-        border-bottom: 1px solid #e9ecef;
-        border-top-left-radius: calc(0.3rem - 1px);
-        border-top-right-radius: calc(0.3rem - 1px);
-    }
-
-    .modal-content {
-        display: block;
-        margin: 0 auto;
-        max-width: 25%;
-    }
-
-    .modal-body {
-        position: relative;
-        -ms-flex: 1 1 auto;
-        flex: 1 1 auto;
-        padding: 1rem;
-    }
-
-    .close {
-        position: absolute;
-        top: 10px;
-        right: 10px;
-        color: #fff;
-        font-size: 24px;
-        font-weight: bold;
-        cursor: pointer;
-    }
-
-    #gambarModal {
-        max-width: 100%;
-        max-height: 100%;
-        cursor: pointer;
-        transition: transform 0.2s;
-    }
-
-    #gambarModal.zoomed {
-        transform: scale(2);
-        /* Ubah faktor skala sesuai kebutuhan zoom. */
-    }
-
-    .card-header {
-        background-color: #CDF5FD
-    }
-</style>
 
 <body class="g-sidenav-show bg-gray-200">
     <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg">
