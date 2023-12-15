@@ -1,7 +1,22 @@
 <?php
 $pageTitle = "Pelanggan";
 include '../assets/layouts/sidebar.php';
-$hasil = "SELECT * FROM tbl_pelanggan ";
+
+if (!isset($_SESSION['kd_akun_user'])) {
+    // Jika tidak, mungkin redirect ke halaman login atau lakukan tindakan lain
+    header("Location: login.php");
+    exit();
+}
+
+// Ambil kd_akun_user dari sesi
+$kd_akun_user = $_SESSION['kd_akun_user'];
+
+
+
+
+
+
+$hasil = "SELECT * FROM tbl_target ";
 
 $tampil = mysqli_query($db, $hasil);
 ?>
@@ -95,18 +110,9 @@ $tampil = mysqli_query($db, $hasil);
                                 <table id="example" class="table table-striped" style="width:100%">
                                     <thead>
                                         <tr>
-                                            <th class="text-center">ID</th>
-                                            <th class="text-center">NAMA</th>
-                                            <th class="text-center">DAYA</th>
-                                            <th class="text-center">PEMBAYARAN</th>
-                                            <th class="text-center">LOKASI</th>
-                                            <th class="text-center">FOTO</th>
-                                            <th class="text-center">MERK</th>
-                                            <th class="text-center">TIPE</th>
-                                            <th class="text-center">NOMOR METER</th>
-                                            <th class="text-center">KETERANGAN</th>
-                                            <th class="text-center">RINCIAN</th>
-                                            <th class="text-center">OPSI</th>
+                                            <th class="text-center">ID PELANGGAN</th>
+                                            <th class="text-center">RBM</th>
+                                            <th class="text-center">MAPS</th>
                                         </tr>
                                     </thead>
                                     </thead>
@@ -137,19 +143,6 @@ $tampil = mysqli_query($db, $hasil);
                 </div>
             </div>
         </div>
-        </div>
-        <div id="gambarPopUp" class="modal">
-
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h3>Bukti Dokumentasi</h3>
-                    <span class="close" onclick="tutupPopUp()">&times;</span>
-                </div>
-                <div class="modal-body">
-                    <img id="gambarModal">
-                </div>
-
-            </div>
         </div>
     </main>
     <?php
