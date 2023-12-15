@@ -4,7 +4,7 @@ include '../assets/layouts/sidebar.php';
 
 if (!isset($_SESSION['kd_akun_user'])) {
     // Jika tidak, mungkin redirect ke halaman login atau lakukan tindakan lain
-    header("Location: login.php");
+    header("Location: index.php");
     exit();
 }
 
@@ -121,6 +121,24 @@ $tampil = mysqli_query($db, $hasil);
                             <div class="table-responsive p-3">
                                 <div class="mb-3">
                                     <a href="pelangganaksi2.php?aksi=tambah&kd_akun_user=<?php echo $kd_akun_user; ?>&tanggal_dipilih=<?php echo $tanggal_dipilih; ?>" class="btn btn-primary" id="button_target">Tambah Data</a>
+                                </div>
+                                <br>
+                                <div class="row">
+                                    <form method="post" class="col">
+                                        <div class="form-group">
+                                            <label for="tanggal"><strong>Pilih Tanggal:</strong></label>
+                                            <div class="d-flex">
+                                                <input type="date" name="tanggal" class="form-control mr-2" style="width: 220px; margin-right: 180px" value="<?php echo $tanggal_dipilih; ?>">
+                                                <button type="submit" class="btn btn-success">Pilih</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+
+                                <br>
+                                <div>
+                                    <p><strong> Dipilih: <?php echo $tanggal_dipilih; ?></strong></p>
+                                    <p><strong> Data yang di input : <?php echo $jumlah_data; ?></strong></p>
                                 </div>
                                 <table id="example" class="table table-striped" style="width:100%">
                                     <thead>
