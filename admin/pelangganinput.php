@@ -40,7 +40,7 @@ $tampil = mysqli_query($db, $hasil);
     .modal-content {
         display: block;
         margin: 0 auto;
-        max-width: 25%;
+        max-width: 20%;
     }
 
     .modal-body {
@@ -69,11 +69,7 @@ $tampil = mysqli_query($db, $hasil);
 
     #gambarModal.zoomed {
         transform: scale(2);
-        /* Ubah faktor skala sesuai kebutuhan zoom. */
-    }
-
-    .card-header {
-        background-color: #CDF5FD
+        /* Sesuaikan faktor skala sesuai kebutuhan zoom. */
     }
 </style>
 
@@ -146,10 +142,11 @@ $tampil = mysqli_query($db, $hasil);
                                                 </td>
 
                                                 <td class="text-center">
-                                                    <a href="javascript:void(0);" onclick="tampilkanGambar('../assets/file/datpel/<?php echo $d['pmet']; ?>')">
-                                                        <img src="../assets/img/datpel/<?php echo $d['pmet']; ?>" style="width: 50px; height: 100px">
+                                                    <a href="#">
+                                                    <img src="../assets/img/datpel/<?php echo $d['pmet']; ?>" style="width: 50px; height: 100px" onclick="openModal('../assets/img/datpel/<?php echo $d['pmet']; ?>')">
                                                     </a>
                                                 </td>
+
 
                                                 <td style="max-width: 200px; white-space: normal;">
                                                     <?php echo $d['merk'] ?>
@@ -190,146 +187,97 @@ $tampil = mysqli_query($db, $hasil);
             </div>
         </div>
         </div>
-        <div id="gambarPopUp" class="modal">
-
+        <!-- modal -->
+        <div id="myModal" class="modal">
             <div class="modal-content">
                 <div class="modal-header">
                     <h3>Bukti Dokumentasi</h3>
-                    <span class="close" onclick="tutupPopUp()">&times;</span>
+                    <span class="close" onclick="closeModal()">&times;</span>
                 </div>
                 <div class="modal-body">
-                    <img id="gambarModal">
+                    <img id="gambarModal" src="" alt="Zoomed Image" class="w-100">
                 </div>
-
             </div>
         </div>
     </main>
 </body>
-    <?php
-    include '../assets/layouts/setting.php'
-    ?>
+<?php
+include '../assets/layouts/setting.php'
+?>
 
-    <!-- Datatable download -->
-    <script src="../assets/js/jquery.min.js"></script>
-    <script src="../assets/DataTables/DataTables-1.13.8/js/jquery.dataTables.min.js"> </script>
-    <script src="../assets/DataTables/DataTables-1.13.8/js/dataTables.bootstrap5.min.js"> </script>
-    <script src="../assets/DataTables/Buttons-2.4.2/js/dataTables.buttons.js"> </script>
-    <script src="../assets/DataTables/Buttons-2.4.2/js/buttons.bootstrap5.min.js"> </script>
-    <script src="../assets/DataTables/JSZip-3.10.1/jszip.min.js"> </script>
-    <script src="../assets/DataTables/pdfmake-0.2.7/pdfmake.min.js"> </script>
-    <script src="../assets/DataTables/pdfmake-0.2.7/vfs_fonts.js"> </script>
-    <script src="../assets/DataTables/Buttons-2.4.2/js/buttons.html5.min.js"> </script>
-    <script src="../assets/DataTables/Buttons-2.4.2/js/buttons.print.min.js"> </script>
-    <script src="../assets/DataTables/Buttons-2.4.2/js/buttons.colVis.min.js"> </script>
+<!-- Datatable download -->
+<script src="../assets/js/jquery.min.js"></script>
+<script src="../assets/DataTables/DataTables-1.13.8/js/jquery.dataTables.min.js"> </script>
+<script src="../assets/DataTables/DataTables-1.13.8/js/dataTables.bootstrap5.min.js"> </script>
+<script src="../assets/DataTables/Buttons-2.4.2/js/dataTables.buttons.js"> </script>
+<script src="../assets/DataTables/Buttons-2.4.2/js/buttons.bootstrap5.min.js"> </script>
+<script src="../assets/DataTables/JSZip-3.10.1/jszip.min.js"> </script>
+<script src="../assets/DataTables/pdfmake-0.2.7/pdfmake.min.js"> </script>
+<script src="../assets/DataTables/pdfmake-0.2.7/vfs_fonts.js"> </script>
+<script src="../assets/DataTables/Buttons-2.4.2/js/buttons.html5.min.js"> </script>
+<script src="../assets/DataTables/Buttons-2.4.2/js/buttons.print.min.js"> </script>
+<script src="../assets/DataTables/Buttons-2.4.2/js/buttons.colVis.min.js"> </script>
 
 
-    <script>
-        $(document).ready(function() {
-            var table = $('#example').DataTable({
-                lengthChange: false,
-                buttons: ['colvis']
-            });
-
-            table.buttons().container()
-                .appendTo('#example_wrapper .col-md-6:eq(0)');
+<script>
+    $(document).ready(function() {
+        var table = $('#example').DataTable({
+            lengthChange: false,
+            buttons: ['colvis']
         });
 
-        function hapusData(idpelanggan) {
-            if (confirm('Apakah Anda yakin ingin menghapus data ini?')) {
-                window.location.href = 'pelangganproses.php?kode=' + idpelanggan + '&proses=proseshapus';
-            }
+        table.buttons().container()
+            .appendTo('#example_wrapper .col-md-6:eq(0)');
+    });
+
+    function hapusData(idpelanggan) {
+        if (confirm('Apakah Anda yakin ingin menghapus data ini?')) {
+            window.location.href = 'pelangganproses.php?kode=' + idpelanggan + '&proses=proseshapus';
         }
+    }
 
-        var currentZoom = 1;
-        var pointerOffsetX = 0;
-        var pointerOffsetY = 0;
+    // Modal Gambar 
+    var clickPosition = {
+        x: 0,
+        y: 0
+    };
 
-        function tampilkanGambar(namaGambar) {
-            var gambarModal = document.getElementById('gambarModal');
-            var gambarPopUp = document.getElementById('gambarPopUp');
-            var modalContent = document.querySelector('.modal-content');
-            var pagination = document.querySelector('.pagination');
+    function openModal(imageSrc) {
+        var modal = document.getElementById("myModal");
+        var img = document.getElementById("gambarModal");
+        img.src = imageSrc;
+        modal.style.display = "block";
+        img.classList.remove("zoomed");
+    }
 
-            gambarModal.src = namaGambar;
-            currentZoom = 1; // Reset zoom ke 1 saat gambar baru ditampilkan.
-            pointerOffsetX = 0;
-            pointerOffsetY = 0;
+    function closeModal() {
+        var modal = document.getElementById("myModal");
+        modal.style.display = "none";
+    }
 
-            // Set lebar modal sesuai dengan gambar asli
-            var gambarAsli = new Image();
-            gambarAsli.src = namaGambar;
-            gambarAsli.onload = function() {
-                var lebarAsli = this.width;
-                modalContent.style.width = lebarAsli + 'px';
-                gambarPopUp.style.display = "block";
-                // Hide pagination
-                pagination.style.display = "none";
-            };
-        }
+    document.getElementById("gambarModal").addEventListener("click", function() {
+        var img = document.getElementById("gambarModal");
+        img.classList.toggle("zoomed");
+    });
+</script>
 
-        gambarPopUp.addEventListener('click', function(event) {
-            if (event.target === gambarPopUp) {
-                tutupPopUp();
-            }
-        });
+<!--   Core JS Files   -->
+<script src="../assets/js/core/popper.min.js"></script>
+<script src="../assets/js/core/bootstrap.min.js"></script>
+<script src="../assets/js/plugins/perfect-scrollbar.min.js"></script>
+<script src="../assets/js/plugins/smooth-scrollbar.min.js"></script>
+<script async src="https://buttons.github.io/buttons.js"></script>
+<script src="../assets/js/material-dashboard.min.js?v=3.1.0"></script>
+<script>
+    var win = navigator.platform.indexOf("Win") > -1;
+    if (win && document.querySelector("#sidenav-scrollbar")) {
+        var options = {
+            damping: "0.5",
+        };
+        Scrollbar.init(document.querySelector("#sidenav-scrollbar"), options);
+    }
+</script>
 
-        function tutupPopUp() {
-            var gambarPopUp = document.getElementById('gambarPopUp');
-            var pagination = document.querySelector('.pagination');
-            gambarPopUp.style.display = "none";
-            // Show pagination again
-            pagination.style.display = "block";
-        }
-
-        gambarModal.addEventListener('click', function(event) {
-            if (currentZoom !== 1) {
-                // Reset zoom jika saat ini di-zoom
-                currentZoom = 1;
-                gambarModal.style.transform = 'scale(1)';
-            } else {
-                // Hitung posisi pointer relatif terhadap gambar
-                var gambarRect = gambarModal.getBoundingClientRect();
-                pointerOffsetX = (event.clientX - gambarRect.left) / gambarRect.width;
-                pointerOffsetY = (event.clientY - gambarRect.top) / gambarRect.height;
-
-                // Zoom dengan faktor 2 (Anda bisa menyesuaikan sesuai kebutuhan)
-                currentZoom = 2;
-                gambarModal.style.transform = 'scale(2)';
-                // Set transform origin sesuai dengan posisi pointer
-                gambarModal.style.transformOrigin = (pointerOffsetX * 100) + '% ' + (pointerOffsetY * 100) + '%';
-            }
-        });
-
-        function tutupPopUp() {
-            var gambarPopUp = document.getElementById('gambarPopUp');
-            var pagination = document.querySelector('.pagination');
-            gambarPopUp.style.display = "none";
-            // Show pagination again
-            pagination.style.display = "block";
-        }
-        gambarModal.addEventListener('click', function() {
-            gambarModal.classList.toggle('zoomed'); // Aktifkan atau nonaktifkan zoom.
-        });
-    </script>
-
-    <!--   Core JS Files   -->
-    <script src="../assets/js/core/popper.min.js"></script>
-    <script src="../assets/js/core/bootstrap.min.js"></script>
-    <script src="../assets/js/plugins/perfect-scrollbar.min.js"></script>
-    <script src="../assets/js/plugins/smooth-scrollbar.min.js"></script>
-    <script async src="https://buttons.github.io/buttons.js"></script>
-    <script src="../assets/js/material-dashboard.min.js?v=3.1.0"></script>
-    <script>
-        var win = navigator.platform.indexOf("Win") > -1;
-        if (win && document.querySelector("#sidenav-scrollbar")) {
-            var options = {
-                damping: "0.5",
-            };
-            Scrollbar.init(document.querySelector("#sidenav-scrollbar"), options);
-        }
-    </script>
-
-    <?php
-    include '../assets/layouts/footer.php'
-    ?>
-</body>
+<?php
+include '../assets/layouts/footer.php'
+?>

@@ -1,5 +1,5 @@
 <?php
-include 'header.php';
+include '../assets/layouts/sidebar.php';
 
 if (!isset($_SESSION['kd_akun_user'])) {
     header("Location: login.php");
