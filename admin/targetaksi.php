@@ -197,81 +197,74 @@ if (isset($_GET['aksi'])) {
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <<<<<<< HEAD <div class="input-group input-group-outline my-3">
+                                                <div class="input-group input-group-outline my-3">
                                                     <label for="kd_akun">Akun Tujuan</label>
                                                     <div class="input-group">
                                                         <input type="text" name="kd_akun" class="form-control" value="<?php echo $d['kd_akun']; ?>" readonly>
                                                     </div>
-                                    </div>
-                                    =======
-                                    >>>>>>> 9bc5ab15d6c2cc3dbae2892a1b97c9a99a6a9027
-                                    <div class="input-group input-group-outline my-3">
-                                        <label for="">ID Pelanggan</label>
-                                        <p style="font-size: 10px; color: red;"><i>*Mohon isi ID pelanggan dengan benar</i></p>
-                                        <div class="input-group">
-                                            <input type="text" name="idpel" class="form-control" value="<?php echo $d['idpel'] ?>" placeholder="Masukkan ID Pelanggan Minimal 11 digit" required autofocus min="10" maxlength="12">
-                                            <span class="input-group-addon"><i class="glyphicon glyphicon-barcode"></i></span>
-                                        </div>
-                                    </div>
-                                    <div class="input-group input-group-outline my-3">
-                                        <label for="">Nama Pelanggan</label>
-                                        <div class="input-group">
-                                            <input type="text" name="nama_pel" class="form-control" value="<?php echo $d['nama_pel'] ?>" placeholder="nama pelanggan" required minlength="2">
-                                            <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                                        </div>
-                                    </div>
-                                    <div class="input-group input-group-outline my-3">
-                                        <label for="">Rute Meter</label>
-                                        <div class="input-group">
-                                            <input type="text" name="rbm" value="<?php echo $d['rbm'] ?>" class="form-control" placeholder="Masukkan Rute" maxlength="13">
-                                            <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                                        </div>
-                                    </div>
-                                    <div class="input-group input-group-outline my-3">
-                                        <label for="">Tipe Pembayaran</label>
-                                        <div class="input-group">
-                                            <select name="tipe" id="" class="form-control" required>
-                                                <option value="<?php echo $d['tipe'] ?>"><?php echo $d['tipe'] ?></option>
-                                                <option value="Pascabayar">Pascabayar</option>
-                                                <option value="Prabayar">Prabayar</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="input-group input-group-outline my-3">
-                                        <label for="">Alamat</label>
-                                        <div class="input-group">
-                                            <input type="text" name="alamat" value="<?php echo $d['alamat'] ?>" class="form-control" placeholder="" maxlength="100">
-                                        </div>
-                                    </div>
-                                    <div class="input-group input-group-outline my-3" hidden>
-                                        <label for="kd_akun">Status</label>
-                                        <div class="input-group">
-                                            <input type="number" name="status" value="0" class="form-control">
-                                        </div>
-                                    </div>
-                                    <div class="input-group input-group-outline my-3">
-                                        <label for="">Lokasi</label>
-                                        <div class="input-group">
-                                            <div class="row">
-                                                <div class="col-6">
-                                                    <td><input type="text" name="latitude" class="form-control" value="<?php echo $d['latitude'] ?>"></td>
                                                 </div>
-                                                <div class="col-6">
-                                                    <td><input type="text" name="longitude" class="form-control" value="<?php echo $d['longitude'] ?>"></td>
+                                                <div class="input-group input-group-outline my-3">
+                                                    <label for="">ID Pelanggan</label>
+                                                    <p style="font-size: 10px; color: red;"><i>*Mohon isi ID pelanggan dengan benar</i></p>
+                                                    <div class="input-group">
+                                                        <input type="text" name="idpel" class="form-control" value="<?php echo $d['idpel'] ?>" placeholder="Masukkan ID Pelanggan Minimal 11 digit" required autofocus min="10" maxlength="12">
+                                                        <span class="input-group-addon"><i class="glyphicon glyphicon-barcode"></i></span>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <span class="input-group-addon"><i class="bi bi-geo-alt"></i></span>
-                                        </div>
-                                        <<<<<<< HEAD=======</div>
-                                            <div class="form-group" hidden>
-                                                <label for="">kode_akun</label>
-                                                <input type="text" name="kd_akun" class="form-control" value="<?php echo $kd_akun_user; ?>" readonly>
-                                                >>>>>>> 9bc5ab15d6c2cc3dbae2892a1b97c9a99a6a9027
-                                            </div>
-                                            <div class="modal-footer">
-                                                <a href="targetdetail.php" class="btn btn-primary">Kembali</a>
-                                                <button type="submit" class="btn btn-success" name="submit" onclick="confirmUpdate()">Submit</button>
-                                            </div>
+                                                <div class="input-group input-group-outline my-3">
+                                                    <label for="">Nama Pelanggan</label>
+                                                    <div class="input-group">
+                                                        <input type="text" name="nama_pel" class="form-control" value="<?php echo $d['nama_pel'] ?>" placeholder="nama pelanggan" required minlength="2">
+                                                        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                                                    </div>
+                                                </div>
+                                                <div class="input-group input-group-outline my-3">
+                                                    <label for="">Rute Meter</label>
+                                                    <div class="input-group">
+                                                        <input type="text" name="rbm" value="<?php echo $d['rbm'] ?>" class="form-control" placeholder="Masukkan Rute" maxlength="13">
+                                                        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                                                    </div>
+                                                </div>
+                                                <div class="input-group input-group-outline my-3">
+                                                    <label for="">Tipe Pembayaran</label>
+                                                    <div class="input-group">
+                                                        <select name="tipe" id="" class="form-control" required>
+                                                            <option value="<?php echo $d['tipe'] ?>"><?php echo $d['tipe'] ?></option>
+                                                            <option value="Pascabayar">Pascabayar</option>
+                                                            <option value="Prabayar">Prabayar</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="input-group input-group-outline my-3">
+                                                    <label for="">Alamat</label>
+                                                    <div class="input-group">
+                                                        <input type="text" name="alamat" value="<?php echo $d['alamat'] ?>" class="form-control" placeholder="" maxlength="100">
+                                                    </div>
+                                                </div>
+                                                <div class="input-group input-group-outline my-3" hidden>
+                                                    <label for="kd_akun">Status</label>
+                                                    <div class="input-group">
+                                                        <input type="number" name="status" value="0" class="form-control">
+                                                    </div>
+                                                </div>
+                                                <div class="input-group input-group-outline my-3">
+                                                    <label for="">Lokasi</label>
+                                                    <div class="input-group">
+                                                        <div class="row">
+                                                            <div class="col-6">
+                                                                <td><input type="text" name="latitude" class="form-control" value="<?php echo $d['latitude'] ?>"></td>
+                                                            </div>
+                                                            <div class="col-6">
+                                                                <td><input type="text" name="longitude" class="form-control" value="<?php echo $d['longitude'] ?>"></td>
+                                                            </div>
+                                                        </div>
+                                                        <span class="input-group-addon"><i class="bi bi-geo-alt"></i></span>
+                                                    </div>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <a href="targetdetail.php" class="btn btn-primary">Kembali</a>
+                                                    <button type="submit" class="btn btn-success" name="submit" onclick="confirmUpdate()">Submit</button>
+                                                </div>
                                             </form>
                                             <script>
                                                 function confirmUpdate() {
