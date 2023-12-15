@@ -185,7 +185,7 @@ if (isset($_GET['aksi'])) {
                                                 </div>
                                             </div>
                                             <div class="form-group" hidden>
-                                                <label for="kd_akun">Status</label>
+                                                <label for="status">Status</label>
                                                 <div class="input-group">
                                                     <input type="number" name="status" value="1" class="form-control">
                                                 </div>
