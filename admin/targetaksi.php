@@ -97,7 +97,7 @@ if (isset($_GET['aksi'])) {
                                             <div class="input-group input-group-outline my-3">
                                                 <label for="">Alamat</label>
                                                 <div class="input-group">
-                                                    <input type="text" name="alamat" class="form-control" placeholder="">
+                                                    <input type="text" name="alamat" class="form-control" placeholder="Masukkan Alamat">
                                                 </div>
                                             </div>
                                             <div class="input-group input-group-outline my-3" hidden>
@@ -187,24 +187,22 @@ if (isset($_GET['aksi'])) {
                                                     <div class="col-md-6">
                                                         <label for="">Tanggal Awal</label>
                                                         <div class="input-group input-group-outline">
-                                                            <input type="text" name="tanggal" class="form-control" value="<?php echo date('Y-m-d'); ?>" readonly>
+                                                            <input type="text" name="tanggal" class="form-control" value="<?php echo $d['tanggal']; ?>" readonly>
                                                         </div>
                                                     </div>
                                                     <div class="col-md-6">
                                                         <label for="">Tanggal Akhir</label>
                                                         <div class="input-group input-group-outline">
-                                                            <input type="date" name="tanggal_akhir" class="form-control" value="<?php echo $tanggal_dipilih; ?>">
+                                                            <input type="date" name="tanggal_akhir" class="form-control" value="<?php echo $d['tanggal_akhir']; ?>">
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <<<<<<< HEAD <div class="input-group input-group-outline my-3">
+                                                <div class="input-group input-group-outline my-3">
                                                     <label for="kd_akun">Akun Tujuan</label>
                                                     <div class="input-group">
                                                         <input type="text" name="kd_akun" class="form-control" value="<?php echo $d['kd_akun']; ?>" readonly>
                                                     </div>
                                     </div>
-                                    =======
-                                    >>>>>>> 9bc5ab15d6c2cc3dbae2892a1b97c9a99a6a9027
                                     <div class="input-group input-group-outline my-3">
                                         <label for="">ID Pelanggan</label>
                                         <p style="font-size: 10px; color: red;"><i>*Mohon isi ID pelanggan dengan benar</i></p>
@@ -262,11 +260,10 @@ if (isset($_GET['aksi'])) {
                                             </div>
                                             <span class="input-group-addon"><i class="bi bi-geo-alt"></i></span>
                                         </div>
-                                        <<<<<<< HEAD=======</div>
+                                        </div>
                                             <div class="form-group" hidden>
                                                 <label for="">kode_akun</label>
                                                 <input type="text" name="kd_akun" class="form-control" value="<?php echo $kd_akun_user; ?>" readonly>
-                                                >>>>>>> 9bc5ab15d6c2cc3dbae2892a1b97c9a99a6a9027
                                             </div>
                                             <div class="modal-footer">
                                                 <a href="targetdetail.php" class="btn btn-primary">Kembali</a>
