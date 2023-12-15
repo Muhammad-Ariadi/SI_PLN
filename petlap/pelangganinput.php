@@ -31,9 +31,9 @@ $result_total_data = mysqli_query($db, $query_total_data);
 $data_total = mysqli_fetch_assoc($result_total_data);
 $total_data = $data_total['total_data'];
 
-$hasil = "SELECT * FROM tbl_target ";
-
+$hasil = "SELECT * FROM tbl_target WHERE kd_akun = '$kd_akun_user' AND ('$tanggal_dipilih' BETWEEN tanggal AND tanggal_akhir)";
 $tampil = mysqli_query($db, $hasil);
+
 ?>
 
 <link href="../assets/DataTables/DataTables-1.13.8/css/dataTables.bootstrap5.min.css" rel="stylesheet" />
