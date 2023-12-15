@@ -128,7 +128,7 @@ $tampil = mysqli_query($db, $hasil);
                                         <div class="form-group">
                                             <label for="tanggal"><strong>Pilih Tanggal:</strong></label>
                                             <div class="d-flex">
-                                                <input type="date" name="tanggal" class="form-control mr-2" style="width: 220px; margin-right: 180px" value="<?php echo $tanggal_dipilih; ?>">
+                                                <input type="date" name="tanggal" class="form-control mr-2" style="width: 220px; margin-right: 170px" value="<?php echo $tanggal_dipilih; ?>">
                                                 <button type="submit" class="btn btn-success">Pilih</button>
                                             </div>
                                         </div>
