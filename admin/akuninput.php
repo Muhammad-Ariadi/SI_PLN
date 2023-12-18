@@ -7,6 +7,9 @@ $tampil = mysqli_query($db, $hasil);
 
 ?>
 
+<link href="../assets/DataTables/DataTables-1.13.8/css/dataTables.bootstrap5.min.css" rel="stylesheet" />
+<link href="../assets/DataTables/Buttons-2.4.2/css/buttons.bootstrap5.min.css " rel="stylesheet" />
+
 <body class="g-sidenav-show bg-gray-200">
   <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg">
     <div class="container-fluid py-4">
@@ -21,9 +24,9 @@ $tampil = mysqli_query($db, $hasil);
               <a href="akunaksi.php?aksi=tambah" class="btn btn-primary">Tambah Akun</a>
             </div>
             <div class="card-body px-0 pb-2">
-              <div class="table-responsive">
+              <div class="table-responsive p-3">
 
-                <table class="table align-items-center table-bordered">
+                <table id="example" class="table align-items-center table-bordered" style="width:100%">
                   <thead>
                     <tr>
                       <th class="text-uppercase text-center text-s ">Nama Lengkap</th>
@@ -127,11 +130,35 @@ $tampil = mysqli_query($db, $hasil);
         </div>
       </div>
     </div>
+
+    <!-- Datatable download -->
+    <script src="../assets/js/jquery.min.js"></script>
+    <script src="../assets/DataTables/DataTables-1.13.8/js/jquery.dataTables.min.js"> </script>
+    <script src="../assets/DataTables/DataTables-1.13.8/js/dataTables.bootstrap5.min.js"> </script>
+    <script src="../assets/DataTables/Buttons-2.4.2/js/dataTables.buttons.js"> </script>
+    <script src="../assets/DataTables/Buttons-2.4.2/js/buttons.bootstrap5.min.js"> </script>
+    <script src="../assets/DataTables/JSZip-3.10.1/jszip.min.js"> </script>
+    <script src="../assets/DataTables/pdfmake-0.2.7/pdfmake.min.js"> </script>
+    <script src="../assets/DataTables/pdfmake-0.2.7/vfs_fonts.js"> </script>
+    <script src="../assets/DataTables/Buttons-2.4.2/js/buttons.html5.min.js"> </script>
+    <script src="../assets/DataTables/Buttons-2.4.2/js/buttons.print.min.js"> </script>
+    <script src="../assets/DataTables/Buttons-2.4.2/js/buttons.colVis.min.js"> </script>
+
     <script src="../assets/js/core/popper.min.js"></script>
     <script src="../assets/js/core/bootstrap.min.js"></script>
     <script src="../assets/js/plugins/perfect-scrollbar.min.js"></script>
     <script src="../assets/js/plugins/smooth-scrollbar.min.js"></script>
     <script>
+      $(document).ready(function() {
+        var table = $('#example').DataTable({
+          lengthChange: false,
+          buttons: ['colvis']
+        });
+
+        table.buttons().container()
+          .appendTo('#example_wrapper .col-md-6:eq(0)');
+      });
+
       var win = navigator.platform.indexOf("Win") > -1;
       if (win && document.querySelector("#sidenav-scrollbar")) {
         var options = {
