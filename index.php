@@ -4,21 +4,28 @@ if (isset($_GET['aksi'])) {
     session_start();
     include 'assets/conn/config.php';
     $username = $_POST['username'];
-    $password = $_POST['password'];
+    $password = $_POST['password']; // No need to encrypt here
 
-    $hasil = $db->query("SELECT * FROM tbl_akun WHERE username='$username' AND password='$password'");
+    $hasil = $db->query("SELECT * FROM tbl_akun WHERE username='$username'");
     $cek = mysqli_num_rows($hasil);
 
     if ($cek > 0) {
       $data = $hasil->fetch_assoc();
-      $_SESSION['kd_akun_user'] = $data['kd_akun']; // Simpan kd_akun di sesi
-      $_SESSION['username'] = $username;
-      $_SESSION['level'] = $data['level'];
+      $hashedPassword = $data['password'];
 
-      if ($data['level'] == '0') {
-        header("location:admin/index.php");
-      } elseif ($data['level'] == '1') {
-        header("location:petlap/index.php");
+      // Verify the entered password against the stored hashed password
+      if (password_verify($password, $hashedPassword)) {
+        $_SESSION['kd_akun_user'] = $data['kd_akun']; // Save kd_akun in session
+        $_SESSION['username'] = $username;
+        $_SESSION['level'] = $data['level'];
+
+        if ($data['level'] == '0') {
+          header("location:admin/index.php");
+        } elseif ($data['level'] == '1') {
+          header("location:petlap/index.php");
+        } else {
+          header("location:index.php?pesan=gagal");
+        }
       } else {
         header("location:index.php?pesan=gagal");
       }
@@ -28,6 +35,7 @@ if (isset($_GET['aksi'])) {
   }
 }
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -61,8 +69,13 @@ if (isset($_GET['aksi'])) {
   }
   ?>
   <main class="main-content mt-0">
-    <div class="page-header align-items-start min-vh-100" style="background-image: url(assets/img/bg/2.JPG);background-repeat: no-repeat;
-  background-size: cover;">
+    <div class="page-header align-items-start min-vh-100" style="
+    background-image: url(assets/img/bg/3.PNG);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    background-size: 1920px 1080px;
+    ">
       <span class="mask bg-gradient-dark opacity-6"></span>
       <div class="container my-auto">
         <div class="row">
@@ -110,15 +123,7 @@ if (isset($_GET['aksi'])) {
   <script src="../assets/js/core/bootstrap.min.js"></script>
   <script src="../assets/js/plugins/perfect-scrollbar.min.js"></script>
   <script src="../assets/js/plugins/smooth-scrollbar.min.js"></script>
-  <script>
-    var win = navigator.platform.indexOf("Win") > -1;
-    if (win && document.querySelector("#sidenav-scrollbar")) {
-      var options = {
-        damping: "0.5",
-      };
-      Scrollbar.init(document.querySelector("#sidenav-scrollbar"), options);
-    }
-  </script>
+
   <!-- Github buttons -->
   <script async defer src="https://buttons.github.io/buttons.js"></script>
   <!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->

@@ -8,6 +8,7 @@ if (isset($_GET['proses'])) {
         $foto = $_FILES['foto']['name'];
         $username = $_POST['username'];
         $password = $_POST['password'];
+        $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
         $level = $_POST['level'];
 
         $file_tmp = $_FILES['foto']['tmp_name'];
@@ -36,7 +37,7 @@ if (isset($_GET['proses'])) {
 
         // Simpan informasi ke database dengan format JPG
         $foto_jpg = pathinfo($new_image_filename, PATHINFO_FILENAME) . '.jpg'; // Ubah format di sini
-        $hasil = $db->query("INSERT into tbl_akun (kd_akun, nama_lengkap, foto, username, password, level) values ('$kd_akun', '$nama_lengkap', '$foto_jpg', '$username', '$password', '$level')");
+        $hasil = $db->query("INSERT into tbl_akun (kd_akun, nama_lengkap, foto, username, password, level) values ('$kd_akun', '$nama_lengkap', '$foto_jpg', '$username', '$hashedPassword', '$level')");
         echo '<script>window.location.href = "akuninput.php";</script>';
     } elseif ($_GET['proses'] == 'ubah') {
         $kd_akun = $_POST['kd_akun'];
@@ -76,10 +77,19 @@ if (isset($_GET['proses'])) {
             $updateFoto = true;
         }
 
-        if ($updateFoto) {
-            $hasil = $db->query("UPDATE tbl_akun set nama_lengkap='$nama_lengkap', username='$username',password='$password',level='$level',foto='$foto_jpg' where kd_akun='$kd_akun'");
+        // Check if a new password is provided
+        if ($password !== "") {
+            // Hash the new password
+            $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+            $passwordUpdateQuery = ", password='$hashedPassword'";
         } else {
-            $hasil = $db->query("UPDATE tbl_akun set nama_lengkap='$nama_lengkap', username='$username',password='$password',level='$level' where kd_akun='$kd_akun'");
+            $passwordUpdateQuery = "";
+        }
+
+        if ($updateFoto) {
+            $hasil = $db->query("UPDATE tbl_akun set nama_lengkap='$nama_lengkap', username='$username'$passwordUpdateQuery, level='$level',foto='$foto_jpg' where kd_akun='$kd_akun'");
+        } else {
+            $hasil = $db->query("UPDATE tbl_akun set nama_lengkap='$nama_lengkap', username='$username'$passwordUpdateQuery, level='$level' where kd_akun='$kd_akun'");
         }
         echo '<script>window.location.href = "akuninput.php";</script>';
     } elseif ($_GET['proses'] == 'proseshapus') {

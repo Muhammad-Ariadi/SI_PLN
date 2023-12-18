@@ -115,9 +115,7 @@ if (isset($_SESSION['username'])) {
             <!-- Bagian Akhir Info Jumlah -->
         </div>
     </main>
-    <?php
-    include '../assets/layouts/setting.php'
-    ?>
+
 
     <?php
     include '../assets/layouts/footer.php'
@@ -133,7 +131,7 @@ if (isset($_SESSION['username'])) {
     var win = navigator.platform.indexOf("Win") > -1;
     if (win && document.querySelector("#sidenav-scrollbar")) {
         var options = {
-            damping: "0.5",
+            damping: "10",
         };
         Scrollbar.init(document.querySelector("#sidenav-scrollbar"), options);
     }
