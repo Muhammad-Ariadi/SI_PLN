@@ -144,7 +144,7 @@ if (isset($_GET['aksi'])) {
                                                 <div class="input-group input-group-outline my-3">
                                                     <label for="">Password</label>
                                                     <div class="input-group">
-                                                        <input type="password" name="password" class="form-control" value="<?php echo $d['password'] ?>" placeholder="password">
+                                                        <input type="password" name="password" class="form-control" value="" placeholder="password">
                                                     </div>
                                                 </div>
                                                 <div class="input-group input-group-outline my-3">

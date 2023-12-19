@@ -242,8 +242,7 @@ if (isset($_GET['aksi'])) {
                 </div>
             </main>
         </body>
-    <?php } elseif ($_GET['aksi'] == 'ubah') { ?>
-
+    <?php } elseif ($_GET['aksi'] == 'ubah') { ?> 
         <body class="g-sidenav-show bg-gray-200">
             <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg">
                 <div class="container-fluid py-4">
