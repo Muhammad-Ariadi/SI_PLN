@@ -143,7 +143,7 @@ $tampil = mysqli_query($db, $hasil);
 
                                                 <td class="text-center">
                                                     <a href="#">
-                                                    <img src="../assets/img/datpel/<?php echo $d['pmet']; ?>" style="width: 50px; height: 100px" onclick="openModal('../assets/img/datpel/<?php echo $d['pmet']; ?>')">
+                                                        <img src="../assets/img/datpel/<?php echo $d['pmet']; ?>" style="width: 50px; height: 100px" onclick="openModal('../assets/img/datpel/<?php echo $d['pmet']; ?>')">
                                                     </a>
                                                 </td>
 
@@ -188,7 +188,7 @@ $tampil = mysqli_query($db, $hasil);
         </div>
         </div>
         <!-- modal -->
-        <div id="myModal" class="modal">
+        <div id="myModal" class="modal" onclick="closeModal()">
             <div class="modal-content">
                 <div class="modal-header">
                     <h3>Bukti Dokumentasi</h3>
@@ -255,9 +255,25 @@ include '../assets/layouts/setting.php'
         modal.style.display = "none";
     }
 
-    document.getElementById("gambarModal").addEventListener("click", function() {
+    // Menutup modal saat pengguna mengklik area di luar modal
+    window.onclick = function(event) {
+        var modal = document.getElementById("myModal");
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    };
+
+
+    document.getElementById("gambarModal").addEventListener("click", function(event) {
         var img = document.getElementById("gambarModal");
-        img.classList.toggle("zoomed");
+
+        // Memeriksa apakah yang diklik adalah gambar, jika ya, lakukan zoom
+        if (event.target.tagName === 'IMG') {
+            img.classList.toggle("zoomed");
+        }
+
+        // Menghentikan event propagation agar modal tidak tertutup oleh event klik ini
+        event.stopPropagation();
     });
 </script>
 
