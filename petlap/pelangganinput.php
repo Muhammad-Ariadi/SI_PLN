@@ -89,7 +89,7 @@ $tampil = mysqli_query($db, $hasil);
                                         ?>
                                             <tr class=" text-center">
                                                 <td style="max-width: 120px; white-space: normal; ">
-                                                    <a href="pelangganaksi.php?aksi=tambah&kd_akun_user=<?php echo $kd_akun_user; ?>&tanggal_dipilih=<?php echo $tanggal_dipilih; ?>&idpel=<?php echo $d['idpel']; ?>"><?php echo $d['idpel']; ?></a>
+                                                    <a href="pelangganaksi.php?aksi=tambah&kd_akun_user=<?php echo $kd_akun_user; ?>&tanggal_dipilih=<?php echo $tanggal_dipilih; ?>&idpel_target=<?php echo $d['idpel_target']; ?>"><?php echo $d['idpel_target']; ?></a>
                                                 </td>
                                                 <td class="text-center"><?php echo $d['rbm']; ?></td>
                                                 <td class="text-center">

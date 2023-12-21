@@ -14,10 +14,10 @@ if (isset($_GET['aksi'])) {
 
         $alert_message = "Mohon untuk Mengaktifkan Location dan Membuka Aplikasi Gmaps Terlebih Dahulu Agar Memperkuat Akurasi Titik Koordinat!";
 
-        $idpelanggan = $_GET['idpel']; // Anda sudah mengambilnya dari $_GET
+        $idpelanggan = $_GET['idpel_target']; // Anda sudah mengambilnya dari $_GET
 
         // Lakukan kueri ke database
-        $query = "SELECT * FROM tbl_target WHERE idpel = '$idpelanggan'";
+        $query = "SELECT * FROM tbl_target WHERE idpel_target = '$idpelanggan'";
         $result = mysqli_query($db, $query);
 ?>
 
@@ -60,7 +60,7 @@ if (isset($_GET['aksi'])) {
                                                 <label for="">ID Pelanggan</label>
                                                 <p style="font-size: 10px; color: red;"><i>*Mohon isi ID pelanggan dengan benar</i></p>
                                                 <div class="input-group">
-                                                    <input type="text" name="idpel" class="form-control" value="<?php echo isset($_GET['idpel']) ? htmlspecialchars($_GET['idpel']) : ''; ?>" placeholder="Masukkan ID Pelanggan Minimal 11 Angka dan Maksimal 12 Angka" autofocus minlength="11" maxlength="12" required>
+                                                    <input type="text" name="idpel" class="form-control" value="<?php echo isset($_GET['idpel_target']) ? htmlspecialchars($_GET['idpel_target']) : ''; ?>" placeholder="Masukkan ID Pelanggan Minimal 11 Angka dan Maksimal 12 Angka" autofocus minlength="11" maxlength="12" required>
                                                     <span class="input-group-addon"><i class="glyphicon glyphicon-barcode"></i></span>
                                                     <span class="input-group-addon"><i class="glyphicon glyphicon-barcode"></i></span>
                                                 </div>

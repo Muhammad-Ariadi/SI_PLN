@@ -8,7 +8,7 @@ if (isset($_GET['proses'])) {
         $kd_akun = $_POST['kd_akun'];
         $tanggal_dipilih = date('Y-m-d');
 
-        $query_cek_target = "SELECT idpel, COALESCE(tanggal_akhir, '$tanggal_dipilih') AS tanggal_akhir FROM tbl_target WHERE kd_akun = '$kd_akun' AND idpel = '$idpel' AND ('$tanggal_dipilih' BETWEEN tanggal AND COALESCE(tanggal_akhir, '$tanggal_dipilih'))";
+        $query_cek_target = "SELECT idpel_target, COALESCE(tanggal_akhir, '$tanggal_dipilih') AS tanggal_akhir FROM tbl_target WHERE kd_akun = '$kd_akun' AND idpel_target = '$idpel' AND ('$tanggal_dipilih' BETWEEN tanggal AND COALESCE(tanggal_akhir, '$tanggal_dipilih'))";
         $result_cek_target = mysqli_query($db, $query_cek_target);
 
         if (mysqli_num_rows($result_cek_target) > 0) {
@@ -51,7 +51,7 @@ if (isset($_GET['proses'])) {
             $query = "INSERT INTO tbl_pelanggan (idpel, nama_pel, daya, tipe, alamat, latitude, longitude, pmet, merk, tipemet, nomet, ket, ket2, kd_akun, tanggal) 
             VALUES ('$idpel', '$nama_pel', '$daya', '$tipe', '$alamat', '$latitude', '$longitude', '$nama_file_baru', '$merk', '$tipemet', '$nomet', '$ket', '$ket2', '$kd_akun', CURDATE())";
 
-            $query1 = "UPDATE tbl_target SET status = '$status' WHERE idpel = '$idpel'";
+            $query1 = "UPDATE tbl_target SET status = '$status' WHERE idpel_target = '$idpel'";
 
             mysqli_query($db, $query);
             mysqli_query($db, $query1);

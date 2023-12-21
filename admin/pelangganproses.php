@@ -27,10 +27,11 @@ if (isset($_GET['proses'])) {
         $nomet = $_POST["nomet"];
         $ket = $_POST["ket"];
         $ket2 = $_POST["ket2"];
+        $kd_akun = $_POST["kd_akun"];
 
 
-        $query = "INSERT INTO tbl_pelanggan (idpel, nama_pel, daya, tipe, latitude, longitude, pmet,merk,tipemet,nomet, ket, ket2, tanggal) 
-        VALUES ('$idpel', '$nama_pel', '$daya', '$tipe', '$latitude', '$longitude', '$nama_file_baru', '$merk', '$tipemet', '$nomet', '$ket', '$ket2', CURDATE())";
+        $query = "INSERT INTO tbl_pelanggan (idpel,kd_akun, nama_pel, daya, tipe, latitude, longitude, pmet,merk,tipemet,nomet, ket, ket2, tanggal) 
+        VALUES ('$idpel','$kd_akun', '$nama_pel', '$daya', '$tipe', '$latitude', '$longitude', '$nama_file_baru', '$merk', '$tipemet', '$nomet', '$ket', '$ket2', CURDATE())";
 
         mysqli_query($db, $query);
 

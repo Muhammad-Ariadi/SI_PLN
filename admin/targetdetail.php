@@ -51,7 +51,7 @@ $kd_akun = $_GET['kd_akun']; // Ambil nilai kd_akun dari URL
                                         ?>
                                             <tr class=" text-center">
                                                 <td class="text-center"><?php echo $counter; ?></td>
-                                                <td class="text-center"><?php echo $db['idpel'] ?></td>
+                                                <td class="text-center"><?php echo $db['idpel_target'] ?></td>
                                                 <td class="text-center"><?php echo $db['rbm'] ?></td>
                                                 <td class="text-center">
                                                     <a href='https://www.google.com/maps?q=<?php echo $db["latitude"] ?>,<?php echo $db["longitude"]; ?>' target="_blank">Lihat di Google Maps</a>
@@ -65,7 +65,7 @@ $kd_akun = $_GET['kd_akun']; // Ambil nilai kd_akun dari URL
                                                                         ?> </td>
                                                 <td class="text-center">
                                                     <a href="targetaksi.php?kode=<?php echo $db['idpel'] ?>&aksi=ubah" class="btn btn-success">Ubah</a>
-                                                    <a href="javascript:void(0);" class="btn btn-danger" onclick="hapusData('<?php echo $db['idpel']; ?>')">Hapus</a>
+                                                    <a href="javascript:void(0);" class="btn btn-danger" onclick="hapusData('<?php echo $db['idpel_target']; ?>')">Hapus</a>
 
                                                 </td>
                                             </tr>
@@ -97,7 +97,6 @@ $kd_akun = $_GET['kd_akun']; // Ambil nilai kd_akun dari URL
 <script src="../assets/DataTables/Buttons-2.4.2/js/buttons.html5.min.js"> </script>
 <script src="../assets/DataTables/Buttons-2.4.2/js/buttons.print.min.js"> </script>
 <script src="../assets/DataTables/Buttons-2.4.2/js/buttons.colVis.min.js"> </script>
-
 
 <script>
     $(document).ready(function() {
