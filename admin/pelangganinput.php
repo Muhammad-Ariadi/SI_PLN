@@ -102,6 +102,7 @@ $tampil = mysqli_query($db, $hasil);
                                             <th class="text-center">NAMA</th>
                                             <th class="text-center">DAYA</th>
                                             <th class="text-center">PEMBAYARAN</th>
+                                            <th class="text-center">Alamat</th>
                                             <th class="text-center">LOKASI</th>
                                             <th class="text-center">FOTO</th>
                                             <th class="text-center">MERK</th>
@@ -135,6 +136,9 @@ $tampil = mysqli_query($db, $hasil);
 
                                                 <td style="max-width: 100px; white-space: normal;">
                                                     <?php echo $d['tipe'] ?>
+                                                </td>
+                                                <td style="max-width: 100px; white-space: normal;">
+                                                    <?php echo $d['alamat'] ?>
                                                 </td>
 
                                                 <td class="text-center">

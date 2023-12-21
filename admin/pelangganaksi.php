@@ -92,6 +92,12 @@ if (isset($_GET['aksi'])) {
                                                 </div>
                                             </div>
                                             <div class="input-group input-group-outline my-3">
+                                                <label for="">Alamat</label>
+                                                <div class="input-group">
+                                                    <input type="text" name="alamat" class="form-control" value="" placeholder="Masukkan Alamat Pelanggan">
+                                                </div>
+                                            </div>
+                                            <div class="input-group input-group-outline my-3">
                                                 <label for="">Foto Meter</label>
                                                 <div class="input-group">
                                                     <input type="file" name="pmet" class="form-control" value="" required>
@@ -295,6 +301,12 @@ if (isset($_GET['aksi'])) {
                                                             <option value="Pascabayar">Pascabayar</option>
                                                             <option value="Prabayar">Prabayar</option>
                                                         </select>
+                                                    </div>
+                                                </div>
+                                                <div class="input-group input-group-outline my-3">
+                                                    <label for="">Alamat</label>
+                                                    <div class="input-group">
+                                                        <input type="text" name="alamat" class="form-control" value="<?php echo $d['alamat'] ?>" placeholder="Masukkan Alamat Pelanggan">
                                                     </div>
                                                 </div>
                                                 <div class="form-group" hidden>

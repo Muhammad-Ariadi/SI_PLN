@@ -15,6 +15,7 @@ if (isset($_GET['proses'])) {
         }
 
         $tipe = $_POST['tipe'];
+        $alamat = $_POST['alamat'];
         $latitude = $_POST["latitude"];
         $longitude = $_POST["longitude"];
         $pmet = $_FILES['pmet']['name'];
@@ -30,8 +31,8 @@ if (isset($_GET['proses'])) {
         $kd_akun = $_POST["kd_akun"];
 
 
-        $query = "INSERT INTO tbl_pelanggan (idpel,kd_akun, nama_pel, daya, tipe, latitude, longitude, pmet,merk,tipemet,nomet, ket, ket2, tanggal) 
-        VALUES ('$idpel','$kd_akun', '$nama_pel', '$daya', '$tipe', '$latitude', '$longitude', '$nama_file_baru', '$merk', '$tipemet', '$nomet', '$ket', '$ket2', CURDATE())";
+        $query = "INSERT INTO tbl_pelanggan (idpel,kd_akun, nama_pel, daya, tipe,alamat, latitude, longitude, pmet,merk,tipemet,nomet, ket, ket2, tanggal) 
+        VALUES ('$idpel','$kd_akun', '$nama_pel', '$daya', '$tipe', '$alamat', '$latitude', '$longitude', '$nama_file_baru', '$merk', '$tipemet', '$nomet', '$ket', '$ket2', CURDATE())";
 
         mysqli_query($db, $query);
 
@@ -46,6 +47,7 @@ if (isset($_GET['proses'])) {
         $nama_pel = $_POST['nama_pel'];
         $daya = $_POST['daya'];
         $tipe = $_POST['tipe'];
+        $alamat = $_POST['alamat'];
         $latitude = $_POST["latitude"];
         $longitude = $_POST["longitude"];
         $merk = $_POST["merk"];
@@ -58,7 +60,7 @@ if (isset($_GET['proses'])) {
         $ket = $_POST["ket"];
         $ket2 = $_POST["ket2"];
 
-        $hasil = $db->query("UPDATE tbl_pelanggan set nama_pel='$nama_pel', daya='$daya', tipe='$tipe', pmet='$nama_file_baru', merk='$merk',tipemet= '$tipemet',nomet= '$nomet', ket='$ket', ket2='$ket2' where idpel='$idpel'");
+        $hasil = $db->query("UPDATE tbl_pelanggan set nama_pel='$nama_pel', daya='$daya', tipe='$tipe', alamat='$alamat', pmet='$nama_file_baru', merk='$merk',tipemet= '$tipemet',nomet= '$nomet', ket='$ket', ket2='$ket2' where idpel='$idpel'");
         if ($hasil) {
             echo "<script>alert('Update berhasil');</script>";
         } else {

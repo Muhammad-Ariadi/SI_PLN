@@ -33,13 +33,13 @@ if (isset($_GET['proses']) && $_GET['proses'] == 'prosestambah') {
 
     $hasil = $db->query("UPDATE tbl_target set tanggal='$tanggal', tanggal_akhir='$tanggal_akhir', nama_pel='$nama_pel', rbm='$rbm',tipe='$tipe',alamat='$alamat',latitude='$latitude', longitude='$longitude',status='$status' where idpel='$idpel'");
 
-    // if ($hasil) {
-    //     echo "<script>alert('Update berhasil');</script>";
-    //     echo "<script>window.location.href = 'targetdetail.php?kd_akun=$kd_akun';</script>";
-    // } else {
-    //     echo "<script>alert('Update gagal: " . mysqli_error($db) . "');</script>";
-    //     echo '<script>window.location.href = "targetdetail.php";</script>';
-    // }
+    if ($hasil) {
+        echo "<script>alert('Update berhasil');</script>";
+        echo "<script>window.location.href = 'targetdetail.php?kd_akun=$kd_akun';</script>";
+    } else {
+        echo "<script>alert('Update gagal: " . mysqli_error($db) . "');</script>";
+        echo '<script>window.location.href = "targetdetail.php";</script>';
+    }
 } elseif ($_GET['proses'] == 'proseshapus') {
     $idpel_target = $_GET['kode'];
 
@@ -50,7 +50,7 @@ if (isset($_GET['proses']) && $_GET['proses'] == 'prosestambah') {
         $row = mysqli_fetch_assoc($result);
         $kd_akun = $row['kd_akun'];
 
-        $deleteQuery = "DELETE FROM tbl_target WHERE idpel_target'$idpel_target'";
+        $deleteQuery = "DELETE FROM tbl_target WHERE idpel_target='$idpel_target'";
         $deleteResult = mysqli_query($db, $deleteQuery);
 
         if ($deleteResult) {
