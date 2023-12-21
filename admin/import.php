@@ -1,6 +1,6 @@
 <?php
-session_start();
-include '../assets/conn/cek.php';
+// session_start();
+// include '../assets/conn/cek.php';
 include '../assets/conn/config.php';
 
 $successCount = 0;
@@ -39,14 +39,14 @@ if (isset($_FILES['excelFile']) && $_FILES['excelFile']['error'] === UPLOAD_ERR_
         $count = $row[0];
 
         // Validasi jika idpel sudah ada dalam tbl_target
-        $checkIdpelQuery = "SELECT COUNT(*) FROM tbl_target WHERE idpel = '$idpel'";
+        $checkIdpelQuery = "SELECT COUNT(*) FROM tbl_target WHERE idpel_target = '$idpel'";
         $resultIdpel = mysqli_query($db, $checkIdpelQuery);
         $rowIdpel = mysqli_fetch_array($resultIdpel);
         $countIdpel = $rowIdpel[0];
 
         if ($count > 0 && $countIdpel == 0) {
             // `kd_akun` valid, lanjutkan dengan INSERT
-            $query = "INSERT INTO tbl_target (idpel, kd_akun, nama_pel, rbm, tipe, alamat, tanggal, tanggal_akhir, latitude, longitude, status) VALUES ('$idpel', '$kd_akun', '$nama_pel', '$rbm', '$tipe', '$alamat', '$tanggal', '$tanggal_akhir', '$latitude', '$longitude', '$status')";
+            $query = "INSERT INTO tbl_target (idpel_target, kd_akun, nama_pel, rbm, tipe, alamat, tanggal, tanggal_akhir, latitude, longitude, status) VALUES ('$idpel', '$kd_akun', '$nama_pel', '$rbm', '$tipe', '$alamat', '$tanggal', '$tanggal_akhir', '$latitude', '$longitude', '$status')";
 
             if (mysqli_query($db, $query)) {
                 $successCount++;
