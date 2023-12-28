@@ -17,7 +17,6 @@ if (isset($_SESSION['username'])) {
     $imagePath = $data['foto'];
     $fotoProfilPath = '../assets/img/' . $imagePath;
 
-    if ($level == '0') {
         $currentDate = date('Y-m-d');
         $queryTarget = $db->query("SELECT COUNT(*) as jumlah_target FROM tbl_pelanggan WHERE DATE(tanggal) = '$currentDate'");
         $dataTarget = $queryTarget->fetch_assoc();
@@ -33,7 +32,6 @@ if (isset($_SESSION['username'])) {
 
         $nama = "$nama_lengkap";
         $role = "$level";
-    }
 } else {
     header("location: ../index.php");
     exit();
