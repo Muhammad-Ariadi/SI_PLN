@@ -187,7 +187,7 @@ if (isset($_GET['aksi'])) {
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="form-group">
+                                            <div class="form-group" hidden>
                                                 <label for="">kode_akun</label>
                                                 <input type="text" name="kd_akun" class="form-control" value="<?php echo $kd_akun_user; ?>" readonly>
                                             </div>

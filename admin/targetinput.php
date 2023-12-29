@@ -31,7 +31,7 @@ if (isset($_SESSION['username'])) {
 }
 ?>
 
-<style>
+<!-- <style>
   .modal {
     display: none;
     position: fixed;
@@ -84,7 +84,7 @@ if (isset($_SESSION['username'])) {
   .foto-user {
     border-radius: 150px;
   }
-</style>
+</style> -->
 
 <body class="g-sidenav-show bg-gray-200">
   <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg">
