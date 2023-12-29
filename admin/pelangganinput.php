@@ -227,7 +227,20 @@ include '../assets/layouts/setting.php'
     $(document).ready(function() {
         var table = $('#example').DataTable({
             lengthChange: false,
-            buttons: ['colvis']
+            buttons: ['colvis'],
+            language: {
+                paginate: {
+                    previous: '‹',
+                    next: '›'
+                },
+                aria: {
+                    paginate: {
+                        previous: 'Previous',
+                        next: 'Next'
+                    }
+                }
+            }
+
         });
 
         table.buttons().container()
