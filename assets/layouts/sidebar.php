@@ -59,6 +59,11 @@ if (isset($_SESSION['username'])) {
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
     <!-- CSS Files -->
     <link id="pagestyle" href="../assets/css/material-dashboard.css?v=3.1.0" rel="stylesheet" />
+
+    <!-- DataTable -->
+    <link href="../assets/DataTables/DataTables-1.13.8/css/dataTables.bootstrap5.min.css" rel="stylesheet" />
+    <link href="../assets/DataTables/Buttons-2.4.2/css/buttons.bootstrap5.min.css " rel="stylesheet" />
+
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <script defer data-site="YOUR_DOMAIN_HERE" src="https://api.nepcha.com/js/nepcha-analytics.js"></script>
 
@@ -99,6 +104,72 @@ if (isset($_SESSION['username'])) {
 
         .dropdown:hover .dropdown-content {
             display: block;
+        }
+
+        /* pelangganinput */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            padding-top: 100px;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.6);
+        }
+
+        .modal-header {
+            display: -ms-flexbox;
+            display: flex;
+            -ms-flex-align: start;
+            align-items: flex-start;
+            -ms-flex-pack: justify;
+            justify-content: space-between;
+            padding: 1rem;
+            border-bottom: 1px solid #e9ecef;
+            border-top-left-radius: calc(0.3rem - 1px);
+            border-top-right-radius: calc(0.3rem - 1px);
+        }
+
+        .modal-content {
+            display: block;
+            margin: 0 auto;
+            max-width: 20%;
+        }
+
+        .modal-body {
+            position: relative;
+            -ms-flex: 1 1 auto;
+            flex: 1 1 auto;
+            padding: 1rem;
+        }
+
+        .close {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            color: #fff;
+            font-size: 24px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        #gambarModal {
+            max-width: 100%;
+            max-height: 100%;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        #gambarModal.zoomed {
+            transform: scale(2);
+            /* Sesuaikan faktor skala sesuai kebutuhan zoom. */
+        }
+
+        .foto-user {
+            border-radius: 150px;
         }
     </style>
 </head>
@@ -196,6 +267,26 @@ if (isset($_SESSION['username'])) {
         </nav>
         <!-- End Navbar -->
 </body>
+
+<!-- Datatable download -->
+<script src="../assets/js/jquery.min.js"></script>
+<script src="../assets/DataTables/DataTables-1.13.8/js/jquery.dataTables.min.js"> </script>
+<script src="../assets/DataTables/DataTables-1.13.8/js/dataTables.bootstrap5.min.js"> </script>
+<script src="../assets/DataTables/Buttons-2.4.2/js/dataTables.buttons.js"> </script>
+<script src="../assets/DataTables/Buttons-2.4.2/js/buttons.bootstrap5.min.js"> </script>
+<script src="../assets/DataTables/JSZip-3.10.1/jszip.min.js"> </script>
+<script src="../assets/DataTables/pdfmake-0.2.7/pdfmake.min.js"> </script>
+<script src="../assets/DataTables/pdfmake-0.2.7/vfs_fonts.js"> </script>
+<script src="../assets/DataTables/Buttons-2.4.2/js/buttons.html5.min.js"> </script>
+<script src="../assets/DataTables/Buttons-2.4.2/js/buttons.print.min.js"> </script>
+<script src="../assets/DataTables/Buttons-2.4.2/js/buttons.colVis.min.js"> </script>
+
+<script src="../assets/js/core/popper.min.js"></script>
+<script src="../assets/js/core/bootstrap.min.js"></script>
+<script src="../assets/js/plugins/perfect-scrollbar.min.js"></script>
+<script src="../assets/js/plugins/smooth-scrollbar.min.js"></script>
+<script src="../js/datatables.js"></script>
+
 <script>
     function toggleDropdown() {
         var dropdown = document.getElementById("profileDropdown");
