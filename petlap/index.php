@@ -28,7 +28,7 @@ if (isset($_SESSION['username'])) {
 
         $queryTarget3 = $db->query("SELECT COUNT(*) as jumlah_data FROM tbl_pelanggan where kd_akun = '$kd_akun'");
         $dataTarget3 = $queryTarget3->fetch_assoc();
-        $jumlah_data = $dataTarget3['jumlah_data'];
+        $jumlah_target3 = $dataTarget3['jumlah_target3'];
 
         $nama = "$nama_lengkap";
         $role = "$level";
