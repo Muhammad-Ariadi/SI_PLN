@@ -114,7 +114,7 @@ if (isset($_SESSION['username'])) {
                       <div class="modal-body">
                         <div class="row">
                           <div class="col text-center">
-                            <a href="../assets/tmp/Daftar_Target.xlsx" target="_blank">
+                            <a href="../assets/template.xlsx" target="_blank">
                               <button class="btn btn-primary" download>Template Excel</button>
                             </a>
                           </div>
