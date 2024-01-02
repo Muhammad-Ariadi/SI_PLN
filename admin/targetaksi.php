@@ -179,10 +179,10 @@ if (isset($_GET['aksi'])) {
                                 <div class="card-body px-0 pb-2">
                                     <div class="card-body">
                                         <?php
-                                        $data = $db->query("SELECT * From tbl_target where idpel='$_GET[kode]'");
+                                        $data = $db->query("SELECT * From tbl_target where idpel_target='$_GET[kode]'");
                                         while ($d = mysqli_fetch_array($data)) {
                                         ?>
-                                            <form class="formedit" action="targetproses.php?proses=ubah&kode=<?php echo $d['idpel']; ?>" method="post" enctype="multipart/form-data" required>
+                                            <form class="formedit" action="targetproses.php?proses=ubah&kode=<?php echo $d['idpel_target']; ?>" method="post" enctype="multipart/form-data" required>
                                                 <div class="row">
                                                     <div class="col-md-6">
                                                         <label for="">Tanggal Awal</label>
@@ -207,7 +207,7 @@ if (isset($_GET['aksi'])) {
                                                     <label for="">ID Pelanggan</label>
                                                     <p style="font-size: 10px; color: red;"><i>*Mohon isi ID pelanggan dengan benar</i></p>
                                                     <div class="input-group">
-                                                        <input type="text" name="idpel_target" class="form-control" value="<?php echo $d['idpel'] ?>" placeholder="Masukkan ID Pelanggan Minimal 11 digit" required autofocus min="10" maxlength="12">
+                                                        <input type="text" name="idpel_target" class="form-control" value="<?php echo $d['idpel_target'] ?>" placeholder="Masukkan ID Pelanggan Minimal 11 digit" required autofocus min="10" maxlength="12">
                                                         <span class="input-group-addon"><i class="glyphicon glyphicon-barcode"></i></span>
                                                     </div>
                                                 </div>

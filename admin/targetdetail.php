@@ -61,7 +61,7 @@ $kd_akun = $_GET['kd_akun']; // Ambil nilai kd_akun dari URL
                                                                         }
                                                                         ?> </td>
                                                 <td class="text-center">
-                                                    <a href="targetaksi.php?kode=<?php echo $db['idpel'] ?>&aksi=ubah" class="btn btn-success">Ubah</a>
+                                                    <a href="targetaksi.php?kode=<?php echo $db['idpel_target'] ?>&aksi=ubah" class="btn btn-success">Ubah</a>
                                                     <a href="javascript:void(0);" class="btn btn-danger" onclick="hapusData('<?php echo $db['idpel_target']; ?>')">Hapus</a>
 
                                                 </td>
