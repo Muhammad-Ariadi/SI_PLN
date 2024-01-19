@@ -24,7 +24,7 @@ $tampil = mysqli_query($db, $hasil);
             <div class="card-body px-0 pb-2">
               <div class="table-responsive p-3">
 
-                <table id="example" class="table align-items-center table-bordered" style="width:100%">
+                <table id="example" class="table table-striped align-items-center table-bordered" style="width:100%">
                   <thead>
                     <tr>
                       <th class="text-uppercase text-center text-s ">Nama Lengkap</th>
