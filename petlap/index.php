@@ -9,8 +9,9 @@ $jumlah_target3 = 0;
 if (isset($_SESSION['username'])) {
     $username = $_SESSION['username'];
     $level = $_SESSION['level'];
+    $kd_akun = $_SESSION['kd_akun'];
 
-    $query = $db->query("SELECT nama_lengkap, level, foto FROM tbl_akun WHERE username='$username'");
+    $query = $db->query("SELECT nama_lengkap, level, foto,kd_akun FROM tbl_akun WHERE username='$username'");
     $data = $query->fetch_assoc();
     $nama_lengkap = $data['nama_lengkap'];
     $welcome_message = "Dashboard";
@@ -18,7 +19,7 @@ if (isset($_SESSION['username'])) {
     $fotoProfilPath = '../assets/img/' . $imagePath;
 
         $currentDate = date('Y-m-d');
-        $queryTarget = $db->query("SELECT COUNT(*) as jumlah_target FROM tbl_pelanggan WHERE DATE(tanggal) = '$currentDate'");
+        $queryTarget = $db->query("SELECT COUNT(*) as jumlah_target FROM tbl_pelanggan where kd_akun='$kd_akun'");
         $dataTarget = $queryTarget->fetch_assoc();
         $jumlah_target = $dataTarget['jumlah_target'];
 
@@ -28,7 +29,7 @@ if (isset($_SESSION['username'])) {
 
         $queryTarget3 = $db->query("SELECT COUNT(*) as jumlah_data FROM tbl_pelanggan where kd_akun = '$kd_akun'");
         $dataTarget3 = $queryTarget3->fetch_assoc();
-        $jumlah_target3 = $dataTarget3['jumlah_target3'];
+        $jumlah_target3 = $dataTarget3['jumlah_data'];
 
         $nama = "$nama_lengkap";
         $role = "$level";
@@ -50,7 +51,7 @@ if (isset($_SESSION['username'])) {
                             </div>
                             <div class="text-end pt-1">
                                 <p class="text-sm mb-0 text-capitalize">Database</p>
-                                <h4 class="mb-0"><?php echo $jumlah_target3; ?></h4>
+                                <h4 class="mb-0"><?php echo $jumlah_target; ?></h4>
                             </div>
                         </div>
                         <hr class="dark horizontal my-0">
@@ -81,7 +82,7 @@ if (isset($_SESSION['username'])) {
                             </div>
                             <div class="text-end pt-1">
                                 <p class="text-sm mb-0 text-capitalize">Today's Success</p>
-                                <h4 class="mb-0"><?php echo $jumlah_target; ?></h4>
+                                <h4 class="mb-0"><?php echo $jumlah_target3; ?></h4>
                             </div>
                         </div>
                         <hr class="dark horizontal my-0">

@@ -117,9 +117,9 @@ if (isset($_SESSION['username'])) {
     </main>
 
 
-    <?php
+    <!-- <?php
     include '../assets/layouts/footer.php'
-    ?>
+    ?> -->
 </body>
 <script src="../assets/js/core/popper.min.js"></script>
 <script src="../assets/js/core/bootstrap.min.js"></script>

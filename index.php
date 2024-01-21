@@ -22,7 +22,7 @@ if (isset($_GET['aksi'])) {
         if ($data['level'] == '0') {
           header("location:admin/index.php");
         } elseif ($data['level'] == '1') {
-          header("location:petlap/index.php");
+          header("location:petlap/pelangganinput.php");
         } else {
           header("location:index.php?pesan=gagal");
         }
@@ -100,9 +100,9 @@ if (isset($_GET['aksi'])) {
                 </div>
               </div>
               <div class="card-body">
-                <form action="index.php?aksi=login" method="post" enctype="multipart/form-data">
+                <form action="index.php?aksi=login" method="post" enctype="multipart/form-data" autocomplete="on" >
                   <div class="input-group input-group-outline my-3">
-                    <input type="text" name="username" class="form-control" placeholder="Username" />
+                    <input type="text" name="username" class="form-control" placeholder="Username" autofocus>
                   </div>
                   <div class="input-group input-group-outline mb-3">
                     <input type="password" name="password" class="form-control" placeholder="Password" />
